@@ -3,7 +3,7 @@
     "target": "es5",
     "module": "commonjs",
     "allowJs": true,
-    "outDir": "dist",
+    "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
     "strictPropertyInitialization": false,
@@ -15,9 +15,17 @@
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": true,
-    "sourceMap": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "src/@types"
+    ],
     "paths": {
-      "@services/*": ["./services/*"]
+      "@config/*": ["config/*"],
+      "@services/*": ["services/*"],
+      "@schemas/*": ["schemas/*"],
+      "@queues/*": ["queues/*"],
+      "@utils/*": ["utils/*"]
     }
-  }
+  },
+  "include": ["src", "__tests__"]
 }
