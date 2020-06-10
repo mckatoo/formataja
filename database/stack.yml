@@ -6,12 +6,14 @@ services:
     image: postgres
     ports:
       - 5432:5432
-    restart: always
     environment:
       POSTGRES_PASSWORD: 123123
+      POSTGRES_DB: formataja
 
-  adminer:
-    image: adminer
-    restart: always
+  pgadmin4:
+    image: dpage/pgadmin4
     ports:
-      - 8080:8080
+      - 8080:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 'mckatoo@gmail.com'
+      PGADMIN_DEFAULT_PASSWORD: '123123'

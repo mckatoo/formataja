@@ -1,28 +1,62 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-datasource db {
-  provider = "postgresql"
-    url      = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
-model Topic {
-  id        Int     @id @default(autoincrement())
-    title   String  @unique
-    level   Int
-    text    String
-    userId  Int
-    user    User @relation(fields: [userId], references: [id])
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-model User {
-  id        Int @id @default(autoincrement())
-    name    String
-    email   String    @unique
-    topics  Topic[]
+model articles {
+  id_article Int      @default(autoincrement()) @id
+  id_format  Int
+  id_user    Int
+  title      String
+  formats    formats  @relation(fields: [id_format], references: [id_format])
+  users      users    @relation(fields: [id_user], references: [id_user])
+  topics     topics[]
 }
 
+model fonts {
+  id_font Int       @default(autoincrement()) @id
+  name    String    @unique
+  formats formats[]
+}
+
+model formats {
+  bold             Boolean    @default(false)
+  botton_margin    Int        @default(0)
+  capitalize       Boolean    @default(false)
+  font_size        Int        @default(10)
+  id_font          Int
+  id_format        Int        @default(autoincrement()) @id
+  indent_paragraph Int        @default(0)
+  italic           Boolean    @default(false)
+  left_margin      Int        @default(0)
+  lowercase        Boolean    @default(false)
+  name             String
+  right_margin     Int        @default(0)
+  top_margin       Int        @default(0)
+  underlined       Boolean    @default(false)
+  uppercase        Boolean    @default(false)
+  fonts            fonts      @relation(fields: [id_font], references: [id_font])
+  articles         articles[]
+}
+
+model topics {
+  id_article Int
+  id_topic   Int      @default(autoincrement()) @id
+  text       String
+  title      String
+  articles   articles @relation(fields: [id_article], references: [id_article])
+}
+
+model users {
+  email    String
+  id_user  Int        @default(autoincrement()) @id
+  name     String
+  password String
+  articles articles[]
+
+  @@unique([email, name], name: "users_idx")
+}
