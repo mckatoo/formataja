@@ -1,6 +1,9 @@
 {
   "watch": ["src"],
   "ext": ".ts,.js",
-  "ignore": [],
+  "ignore": [
+    "node_modules",
+    "**/*.spec.ts"
+  ],
   "exec": "node --inspect -r tsconfig-paths/register -r sucrase/register"
 }
