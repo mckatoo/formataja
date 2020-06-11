@@ -16,12 +16,14 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/mckatoo/formataja)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/mckatoo/formataja)
 
-## RoadMap
+## Feito
 
 ### Cadastro de usuários
 - [x] Testes
 - [x] Rotas
 - [x] Controller
+
+## A fazer
 
 ### Cadastro de artigos
 - [ ] Um usuário poder ter vários artigos
