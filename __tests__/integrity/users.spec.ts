@@ -39,7 +39,23 @@ describe('Users', function() {
     expect(response.body.user.password).toBe(user.password)
   })
 
-  it('should list users by email', async () => {
+  it('should list users by name without password field', async () => {
+    const user = await users.create({
+      data: {
+        name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+        email: faker.internet.email(),
+        password: faker.internet.password()
+      }
+    })
+    const response = await request(app)
+    .get(`/users/name/${user.name}`)
+    // .set('Authorization', `Bearer ${user.generateToken()}`)
+    expect(response.status).toBe(200)
+    expect(response.body.user[0].email).toBe(user.email)
+    expect(response.body.user[0]).not.toHaveProperty('password')
+  })
+
+  it('should list users by email without password field', async () => {
     const user = await users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
@@ -52,6 +68,7 @@ describe('Users', function() {
     // .set('Authorization', `Bearer ${user.generateToken()}`)
     expect(response.status).toBe(200)
     expect(response.body.user[0].email).toBe(user.email)
+    expect(response.body.user[0]).not.toHaveProperty('password')
   })
 
   it('Should return user created', async() => {
