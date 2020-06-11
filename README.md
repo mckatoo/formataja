@@ -18,6 +18,11 @@
 
 ## RoadMap
 
+### Cadastro de usuários
+- [x] Testes
+- [x] Rotas
+- [x] Controller
+
 ### Cadastro de artigos
 - [ ] Um usuário poder ter vários artigos
 - [ ] Um artigo pode ter vários tópicos
