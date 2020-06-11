@@ -8,6 +8,8 @@ platform:
 steps:
   - name: backend
     image: node:12.18.0
+    environment:
+      DATABASE_URL: 127.0.0.1
     depends_on:
       - database
     commands:
