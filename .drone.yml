@@ -9,7 +9,7 @@ steps:
   - name: backend
     image: node:12.18.0
     environment:
-      DATABASE_URL: database
+      DATABASE_URL: db
     depends_on:
       - database
     commands:
@@ -18,7 +18,7 @@ steps:
       - npx jest --runInBand --detectOpenHandles
 
 services:
-  - name: database
+  - name: db
     image: postgres
     detach: true
     ports:
