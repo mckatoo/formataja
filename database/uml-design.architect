@@ -4,11 +4,11 @@
  <print-settings numCopies="1" zoom="1.0" pageNumbersPrinted="true" orientation="1" paperWidth="612.0" paperHeight="792.0" leftBorder="50.0" rightBorder="50.0" topBorder="50.0" bottomBorder="50.0" />
  <project-data-sources>
   <data-source id="DS0">
-   <property key="Logical" value="formataja" />
+   <property key="Logical" value="local" />
    <property key="Connection Type" value="PostgreSQL" />
-   <property key="JDBC URL" value="jdbc:postgresql://localhost:5432/formataja" />
-   <property key="UID" value="postgres" />
-   <property key="PWD" value="123123" />
+   <property key="JDBC URL" value="jdbc:postgresql://127.0.0.1:5432/uniesi_test" />
+   <property key="UID" value="uniesi" />
+   <property key="PWD" value="12345" />
    <property key="ca.sqlpower.architect.etl.kettle.database" value="" />
    <property key="ca.sqlpower.architect.etl.kettle.port" value="" />
    <property key="ca.sqlpower.architect.etl.kettle.hostname" value="" />
@@ -16,11 +16,11 @@
    <property key="ca.sqlpower.architect.etl.kettle.repos.password" value="" />
   </data-source>
   <data-source id="DS0">
+   <property key="Logical" value="local" />
    <property key="Connection Type" value="PostgreSQL" />
-   <property key="Logical" value="formataja" />
-   <property key="JDBC URL" value="jdbc:postgresql://localhost:5432/formataja" />
-   <property key="UID" value="postgres" />
-   <property key="PWD" value="123123" />
+   <property key="JDBC URL" value="jdbc:postgresql://127.0.0.1:5432/uniesi_test" />
+   <property key="UID" value="uniesi" />
+   <property key="PWD" value="12345" />
    <property key="ca.sqlpower.architect.etl.kettle.database" value="" />
    <property key="ca.sqlpower.architect.etl.kettle.port" value="" />
    <property key="ca.sqlpower.architect.etl.kettle.hostname" value="" />
@@ -29,7 +29,7 @@
   </data-source>
  </project-data-sources>
  <source-databases>
-  <database id="DB0" populated="true" UUID="32d14dbd-ea68-42d7-9619-41b5a4142fa9" dbcs-ref="DS0" name="formataja" physicalName="formataja" >
+  <database id="DB0" populated="true" UUID="32d14dbd-ea68-42d7-9619-41b5a4142fa9" dbcs-ref="DS0" name="local" physicalName="formataja" >
    <catalog id="CAT1" populated="true" UUID="4891cd38-fa71-41a7-8865-8fceee8063d3" name="formataja" nativeTerm="database" physicalName="formataja" >
     <schema id="SCH2" populated="true" UUID="cec7307b-97cd-427f-b00a-4ac86f53b109" name="" nativeTerm="schema" physicalName="" >
      <table id="TAB3" populated="false" UUID="972a15f9-384c-41b5-89e9-3f74a1eb94ae" name="_Migration" objectType="TABLE" physicalName="_Migration" >
@@ -245,28 +245,28 @@
      <table id="TAB63" populated="false" UUID="176f6154-20e7-45f9-adb1-4c3f826234fb" name="domain_constraints" objectType="VIEW" physicalName="domain_constraints" >
       <remarks></remarks>
       <folder id="FOLTAB631" populated="true" name="Columns" physicalName="Columns" type="1">
-       <column id="COL64" populated="true" UUID="af6d64ef-c5c2-4cf7-ab48-ef63487480bf" autoIncrement="false" name="constraint_catalog" nullable="1" physicalName="constraint_catalog" precision="2147483647" referenceCount="1" scale="0" sourceDataTypeName="sql_identifier" type="1111" >
+       <column id="COL64" populated="true" UUID="af6d64ef-c5c2-4cf7-ab48-ef63487480bf" autoIncrement="false" defaultValue="" name="constraint_catalog" nullable="1" physicalName="constraint_catalog" precision="2147483647" referenceCount="1" scale="0" sourceDataTypeName="sql_identifier" type="1111" >
         <remarks></remarks>
        </column>
-       <column id="COL65" populated="true" UUID="9ababa55-19d8-4a02-9e76-e2b35ffd58c2" autoIncrement="false" name="constraint_schema" nullable="1" physicalName="constraint_schema" precision="2147483647" referenceCount="1" scale="0" sourceDataTypeName="sql_identifier" type="1111" >
+       <column id="COL65" populated="true" UUID="9ababa55-19d8-4a02-9e76-e2b35ffd58c2" autoIncrement="false" defaultValue="" name="constraint_schema" nullable="1" physicalName="constraint_schema" precision="2147483647" referenceCount="1" scale="0" sourceDataTypeName="sql_identifier" type="1111" >
         <remarks></remarks>
        </column>
-       <column id="COL66" populated="true" UUID="85b77967-28ff-4705-8e63-dd1062523730" autoIncrement="false" name="constraint_name" nullable="1" physicalName="constraint_name" precision="2147483647" referenceCount="1" scale="0" sourceDataTypeName="sql_identifier" type="1111" >
+       <column id="COL66" populated="true" UUID="85b77967-28ff-4705-8e63-dd1062523730" autoIncrement="false" defaultValue="" name="constraint_name" nullable="1" physicalName="constraint_name" precision="2147483647" referenceCount="1" scale="0" sourceDataTypeName="sql_identifier" type="1111" >
         <remarks></remarks>
        </column>
-       <column id="COL67" populated="true" UUID="5a75343d-087b-4ba1-86e6-80f93a92f24f" autoIncrement="false" name="domain_catalog" nullable="1" physicalName="domain_catalog" precision="2147483647" referenceCount="1" scale="0" sourceDataTypeName="sql_identifier" type="1111" >
+       <column id="COL67" populated="true" UUID="5a75343d-087b-4ba1-86e6-80f93a92f24f" autoIncrement="false" defaultValue="" name="domain_catalog" nullable="1" physicalName="domain_catalog" precision="2147483647" referenceCount="1" scale="0" sourceDataTypeName="sql_identifier" type="1111" >
         <remarks></remarks>
        </column>
-       <column id="COL68" populated="true" UUID="8a5ce809-07c4-4bc1-9aae-79da86afdf56" autoIncrement="false" name="domain_schema" nullable="1" physicalName="domain_schema" precision="2147483647" referenceCount="1" scale="0" sourceDataTypeName="sql_identifier" type="1111" >
+       <column id="COL68" populated="true" UUID="8a5ce809-07c4-4bc1-9aae-79da86afdf56" autoIncrement="false" defaultValue="" name="domain_schema" nullable="1" physicalName="domain_schema" precision="2147483647" referenceCount="1" scale="0" sourceDataTypeName="sql_identifier" type="1111" >
         <remarks></remarks>
        </column>
-       <column id="COL69" populated="true" UUID="41b40743-0628-4eca-834d-e3391b566c0f" autoIncrement="false" name="domain_name" nullable="1" physicalName="domain_name" precision="2147483647" referenceCount="1" scale="0" sourceDataTypeName="sql_identifier" type="1111" >
+       <column id="COL69" populated="true" UUID="41b40743-0628-4eca-834d-e3391b566c0f" autoIncrement="false" defaultValue="" name="domain_name" nullable="1" physicalName="domain_name" precision="2147483647" referenceCount="1" scale="0" sourceDataTypeName="sql_identifier" type="1111" >
         <remarks></remarks>
        </column>
-       <column id="COL70" populated="true" UUID="c66f06ef-f384-4d9e-9903-fc6bb83acb2c" autoIncrement="false" name="is_deferrable" nullable="1" physicalName="is_deferrable" precision="2147483647" referenceCount="1" scale="0" sourceDataTypeName="yes_or_no" type="1111" >
+       <column id="COL70" populated="true" UUID="c66f06ef-f384-4d9e-9903-fc6bb83acb2c" autoIncrement="false" defaultValue="" name="is_deferrable" nullable="1" physicalName="is_deferrable" precision="2147483647" referenceCount="1" scale="0" sourceDataTypeName="yes_or_no" type="1111" >
         <remarks></remarks>
        </column>
-       <column id="COL71" populated="true" UUID="984f893c-a1a6-4d44-977e-7b93702134d3" autoIncrement="false" name="initially_deferred" nullable="1" physicalName="initially_deferred" precision="2147483647" referenceCount="1" scale="0" sourceDataTypeName="yes_or_no" type="1111" >
+       <column id="COL71" populated="true" UUID="984f893c-a1a6-4d44-977e-7b93702134d3" autoIncrement="false" defaultValue="" name="initially_deferred" nullable="1" physicalName="initially_deferred" precision="2147483647" referenceCount="1" scale="0" sourceDataTypeName="yes_or_no" type="1111" >
         <remarks></remarks>
        </column>
        </folder>
@@ -655,7 +655,7 @@
     <index id="IDX178" populated="true" UUID="d0707ee4-ea5b-4468-b06f-19a334097baf" clustered="false" name="font_pk" physicalName="font_pk" primaryKeyIndex="true" unique="true" >
      <index-column id="IDC179" populated="true" UUID="de0f5315-8505-4e1e-87bf-1b4ef8a5d970" ascendingOrDescending="UNSPECIFIED" column-ref="COL176" name="id_font" physicalName="id_font" />
     </index>
-    <index id="IDX180" populated="true" UUID="44ca0fca-a8e5-4456-bcb6-e77ec401578f" clustered="false" name="Fonts_idx" physicalName="fonts_idx" primaryKeyIndex="false" unique="true" >
+    <index id="IDX180" populated="true" UUID="44ca0fca-a8e5-4456-bcb6-e77ec401578f" clustered="false" name="unique_fonts_name" physicalName="unique_fonts_name" primaryKeyIndex="false" unique="true" >
      <index-column id="IDC181" populated="true" UUID="30fcf0ce-6138-4a41-ad4f-1836f5d94c7a" ascendingOrDescending="UNSPECIFIED" column-ref="COL177" name="name" physicalName="name" />
     </index>
    </folder>
@@ -710,24 +710,26 @@
     <index id="IDX194" populated="true" UUID="0fb1ac50-ac9b-427e-b7f8-262da00edbfc" clustered="false" name="users_pk" physicalName="users_pk" primaryKeyIndex="true" unique="true" >
      <index-column id="IDC195" populated="true" UUID="14b923e3-bbd3-4557-a244-6fb104a44d0b" ascendingOrDescending="UNSPECIFIED" column-ref="COL190" name="id_user" physicalName="id_user" />
     </index>
-    <index id="IDX196" populated="true" UUID="bc7df854-6e95-42d0-833e-a861f10c840e" clustered="false" name="Users_idx" physicalName="users_idx" primaryKeyIndex="false" unique="true" >
+    <index id="IDX196" populated="true" UUID="bc7df854-6e95-42d0-833e-a861f10c840e" clustered="false" name="unique_users_email" physicalName="unique_users_email" primaryKeyIndex="false" unique="true" >
      <index-column id="IDC197" populated="true" UUID="06c514d7-a6a1-479e-886d-1551d330860a" ascendingOrDescending="UNSPECIFIED" column-ref="COL191" name="email" physicalName="email" />
-     <index-column id="IDC198" populated="true" UUID="46d4f7d6-ece9-4fd5-87c3-986ba703909a" ascendingOrDescending="UNSPECIFIED" column-ref="COL192" name="name" physicalName="name" />
+    </index>
+    <index id="IDX198" populated="true" UUID="ed93dbe5-d269-423d-9e73-8deafc5a07d3" clustered="false" name="unique_users_name" physicalName="unique_users_name" primaryKeyIndex="false" unique="true" >
+     <index-column id="IDC199" populated="true" UUID="a148936d-6cc4-449b-92d7-0db54a4bb7ff" ascendingOrDescending="UNSPECIFIED" column-ref="COL192" name="name" physicalName="name" />
     </index>
    </folder>
   </table>
   <relationships>
-   <relationship id="REL199" populated="true" UUID="39072800-92d4-4948-bda3-f4c840e2e327" deferrability="7" deleteRule="3" fk-table-ref="TAB182" fkCardinality="7" identifying="false" name="Formats_Articles_fk" physicalName="formats_articles_fk" pk-table-ref="TAB157" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP200" populated="true" UUID="6f3b2a7c-6d9f-45f8-af50-b3c3dd1ef00d" fk-column-ref="COL186" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL158" />
+   <relationship id="REL200" populated="true" UUID="39072800-92d4-4948-bda3-f4c840e2e327" deferrability="7" deleteRule="3" fk-table-ref="TAB182" fkCardinality="7" identifying="false" name="Formats_Articles_fk" physicalName="Formats_Articles_fk" pk-table-ref="TAB157" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP201" populated="true" UUID="6f3b2a7c-6d9f-45f8-af50-b3c3dd1ef00d" fk-column-ref="COL186" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL158" />
    </relationship>
-   <relationship id="REL201" populated="true" UUID="53078f81-a496-49bc-adc6-b1c7fc82e60f" deferrability="7" deleteRule="3" fk-table-ref="TAB157" fkCardinality="7" identifying="false" name="Fonts_Formats_fk" physicalName="fonts_formats_fk" pk-table-ref="TAB175" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP202" populated="true" UUID="d2af7f5f-c807-49b1-ac71-d8693f0db70d" fk-column-ref="COL172" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL176" />
+   <relationship id="REL202" populated="true" UUID="53078f81-a496-49bc-adc6-b1c7fc82e60f" deferrability="7" deleteRule="3" fk-table-ref="TAB157" fkCardinality="7" identifying="false" name="Fonts_Formats_fk" physicalName="Fonts_Formats_fk" pk-table-ref="TAB175" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP203" populated="true" UUID="d2af7f5f-c807-49b1-ac71-d8693f0db70d" fk-column-ref="COL172" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL176" />
    </relationship>
-   <relationship id="REL203" populated="true" UUID="b4d808ab-b44c-4a69-a17d-49897234194b" deferrability="7" deleteRule="0" fk-table-ref="TAB150" fkCardinality="6" identifying="false" name="Articles_Topics_fk" physicalName="articles_topics_fk" pk-table-ref="TAB182" pkCardinality="2" updateRule="0" >
-    <column-mapping id="CMP204" populated="true" UUID="c3e742f4-c843-42c3-ac05-8d78c184848f" fk-column-ref="COL154" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL183" />
+   <relationship id="REL204" populated="true" UUID="b4d808ab-b44c-4a69-a17d-49897234194b" deferrability="7" deleteRule="0" fk-table-ref="TAB150" fkCardinality="6" identifying="false" name="Articles_Topics_fk" physicalName="Articles_Topics_fk" pk-table-ref="TAB182" pkCardinality="2" updateRule="0" >
+    <column-mapping id="CMP205" populated="true" UUID="c3e742f4-c843-42c3-ac05-8d78c184848f" fk-column-ref="COL154" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL183" />
    </relationship>
-   <relationship id="REL205" populated="true" UUID="860d2ba9-9215-4d7f-9331-106bccb90104" deferrability="7" deleteRule="3" fk-table-ref="TAB182" fkCardinality="7" identifying="false" name="Users_Articles_fk" physicalName="users_articles_fk" pk-table-ref="TAB189" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP206" populated="true" UUID="f55673a3-36fd-402f-943e-181b5830de3d" fk-column-ref="COL185" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL190" />
+   <relationship id="REL206" populated="true" UUID="860d2ba9-9215-4d7f-9331-106bccb90104" deferrability="7" deleteRule="3" fk-table-ref="TAB182" fkCardinality="7" identifying="false" name="Users_Articles_fk" physicalName="Users_Articles_fk" pk-table-ref="TAB189" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP207" populated="true" UUID="f55673a3-36fd-402f-943e-181b5830de3d" fk-column-ref="COL185" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL190" />
    </relationship>
   </relationships>
  </target-database>
@@ -745,10 +747,10 @@
   <table-pane table-ref="TAB175" x="32" y="252" bgColor="0xf0f0f0" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB182" x="422" y="128" bgColor="0xf0f0f0" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB189" x="38" y="20" bgColor="0xf0f0f0" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-link relationship-ref="REL205" pkConnection="0.8555555555555555" fkConnection="0.13333333333333333" rLineColor="0x333333" pkLabelText="" fkLabelText="" orientation="33"/>
-  <table-link relationship-ref="REL203" pkConnection="0.6133333333333333" fkConnection="0.3888888888888889" rLineColor="0x333333" pkLabelText="" fkLabelText="" orientation="33"/>
-  <table-link relationship-ref="REL201" pkConnection="0.732" fkConnection="0.0" rLineColor="0x333333" pkLabelText="" fkLabelText="" orientation="36"/>
-  <table-link relationship-ref="REL199" pkConnection="0.6111111111111112" fkConnection="0.45493562231759654" rLineColor="0x333333" pkLabelText="" fkLabelText="" orientation="72"/>
+  <table-link relationship-ref="REL206" pkConnection="0.8555555555555555" fkConnection="0.13333333333333333" rLineColor="0x333333" pkLabelText="" fkLabelText="" orientation="33"/>
+  <table-link relationship-ref="REL204" pkConnection="0.6133333333333333" fkConnection="0.3888888888888889" rLineColor="0x333333" pkLabelText="" fkLabelText="" orientation="33"/>
+  <table-link relationship-ref="REL202" pkConnection="0.732" fkConnection="0.0" rLineColor="0x333333" pkLabelText="" fkLabelText="" orientation="36"/>
+  <table-link relationship-ref="REL200" pkConnection="0.6111111111111112" fkConnection="0.45493562231759654" rLineColor="0x333333" pkLabelText="" fkLabelText="" orientation="72"/>
  </play-pen>
  <critic-manager>
   <critic-grouping platformType="Generic" enabled="true">
