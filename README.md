@@ -25,6 +25,10 @@
 
 ## A fazer
 
+### Cadastro de usuários
+- [ ] Autorização
+- [ ] Autenticação
+
 ### Cadastro de artigos
 - [ ] Um usuário poder ter vários artigos
 - [ ] Um artigo pode ter vários tópicos
