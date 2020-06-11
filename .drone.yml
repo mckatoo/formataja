@@ -9,7 +9,7 @@ steps:
   - name: backend
     image: node:12.18.0
     environment:
-      DATABASE_URL: 127.0.0.1
+      DATABASE_URL: database
     depends_on:
       - database
     commands:
