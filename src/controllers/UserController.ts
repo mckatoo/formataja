@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { Request, Response } from 'express'
+import bcrypt from 'bcryptjs'
 
 const Users = new PrismaClient().users
 
