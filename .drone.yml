@@ -9,25 +9,16 @@ steps:
   - name: backend
     image: node:12.18.0
     environment:
-      DB_DIALECT: mariadb
-      DB_NAME: db_test
-      DB_HOST: database
-      DB_PORT: 3306
-      DB_USER: uniesi
-      DB_PASS: "asfsjdflksjdfh"
-      DB_TIMEZONE: "America/Sao_Paulo"
-      APP_PORT: 8000
-      APP_SECURE_PORT: 8443
-      APP_SECRET: TESTE1cvcvcsdf545423
-      STORAGE_TYPE: "local"
-      BUCKET_NAME: ""
-      CORS: '["http://uniesiapi:3000", "http://campus1-iesi.ddns.net:3000", "http://uniesiapi.io:3000", "http://127.0.0.1:3000", "http://web.uniesi"]'
+      DATABASE_URL: "postgresql://postgres:123123@localhost:5432/formataja?schema=public"
     depends_on:
       - database
     commands:
-      - npm i
-      - npx prisma generate
+      - npm install --no-optional --silent > /dev/null
+      - npx prisma deploy -f
       - npx jest --runInBand --detectOpenHandles
+    when:
+      branch:
+      - develop
 
 services:
   - name: database
