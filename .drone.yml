@@ -13,7 +13,7 @@ steps:
     depends_on:
       - database
     commands:
-      - npm install --no-optional --silent > /dev/null
+      - npm i
       - npx prisma deploy -f
       - npx jest --runInBand --detectOpenHandles
     when:
