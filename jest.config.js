@@ -2,7 +2,7 @@ const { pathsToModuleNameMapper } = require('ts-jest/utils');
 const { compilerOptions } = require('./tsconfig.json');
 
 module.exports = {
-  testTimeout: 1000,
+  testTimeout: 5000,
 
   // All imported modules in your tests should be mocked automatically
   // automock: false,
