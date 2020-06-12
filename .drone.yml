@@ -14,6 +14,7 @@ steps:
       - database
     commands:
       - npm i
+      - npx prisma generate
       - npx prisma deploy -f
       - npx jest --runInBand --detectOpenHandles
     when:
@@ -29,3 +30,6 @@ services:
     environment:
       POSTGRES_PASSWORD: 123123
       POSTGRES_DB: formataja
+    commands:
+      - sleep 5
+      - psql -U postgres -x 123123 -d formataja -a -f database.sql
