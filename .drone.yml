@@ -13,6 +13,7 @@ steps:
     depends_on:
       - database
     commands:
+      - sleep 15
       - npm i
       - npx jest --runInBand --detectOpenHandles
     when:
