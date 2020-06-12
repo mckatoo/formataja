@@ -8,6 +8,7 @@ export default {
 
   async store (req: Request, res: Response) {
     try {
+      const hash = await bcrypt.hash(req.body.password, 10)
       const user = await Users.create({
         data: req.body
       })
