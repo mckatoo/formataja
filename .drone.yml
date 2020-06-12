@@ -9,7 +9,7 @@ steps:
   - name: backend
     image: node:12.18.0
     environment:
-      DATABASE_URL: "postgresql://postgres:123123@localhost:5432/formataja?schema=public"
+      DATABASE_URL: "postgresql://postgres:123123@database:5432/formataja?schema=public"
     depends_on:
       - database
     commands:
