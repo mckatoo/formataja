@@ -10,7 +10,16 @@ export default {
     try {
       const hash = await bcrypt.hash(req.body.password, 10)
       const user = await Users.create({
-        data: req.body
+        data: {
+          name: req.body.name,
+          email: req.body.email,
+          password: hash
+        },
+        select: {
+          id_user: true,
+          name: true,
+          email: true
+        }
       })
       return res.status(201).json({ user })
     } catch (errors) {
@@ -20,7 +29,13 @@ export default {
 
   async list(_req: Request, res: Response) {
     try {
-      const users = await Users.findMany()
+      const users = await Users.findMany({
+        select: {
+          id_user: true,
+          name: true,
+          email: true
+        }
+      })
       return res.status(200).json({ users })
     } catch (error) {
       return res.status(400).json({ error })
@@ -50,6 +65,11 @@ export default {
       const user = await Users.update({
         where: { id_user },
         data: { name, email, password },
+        select: {
+          id_user: true,
+          name: true,
+          email: true
+        }
       })
       return res.status(202).json({ user })
     } catch (errors) {
@@ -61,7 +81,12 @@ export default {
     try {
       const id_user = parseInt(req.params.id_user)
       const user = await Users.findOne({
-        where: { id_user  }
+        where: { id_user  },
+        select: {
+          id_user: true,
+          name: true,
+          email: true
+        }
       })
       return res.status(200).json({ user })
     } catch (error) {
@@ -74,7 +99,11 @@ export default {
       const { name } = req.params
       const user = await Users.findMany({
         where: { name },
-        select: { id_user: true, name: true, email: true }
+        select: {
+          id_user: true,
+          name: true,
+          email: true
+        }
       })
       return res.status(200).json({ user })
     } catch (error) {
