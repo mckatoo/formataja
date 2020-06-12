@@ -9,13 +9,16 @@ steps:
   - name: backend
     image: node:12.18.0
     environment:
-      DATABASE_URL: db
+      DATABASE_URL: "postgresql://postgres:123123@database:5432/formataja?schema=public"
     depends_on:
       - database
     commands:
+      - sleep 15
       - npm i
-      - npx prisma generate
       - npx jest --runInBand --detectOpenHandles
+    when:
+      branch:
+      - develop
 
 services:
   - name: db
@@ -26,3 +29,6 @@ services:
     environment:
       POSTGRES_PASSWORD: 123123
       POSTGRES_DB: formataja
+    commands:
+      - sleep 5
+      - psql -U postgres -x 123123 -d formataja -a -f database.sql

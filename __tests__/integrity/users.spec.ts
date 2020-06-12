@@ -3,11 +3,11 @@ import request from 'supertest'
 import { PrismaClient } from '@prisma/client'
 import app from '../../src/app'
 
-const users = new PrismaClient().users
+const Users = new PrismaClient().users
 
 describe('Users', function() {
   beforeAll(async() => {
-    await users.deleteMany({
+    await Users.deleteMany({
       where: {
         id_user: {
           gt: 0
@@ -22,8 +22,8 @@ describe('Users', function() {
     expect(response.status).toBe(200)
   });
 
-  it('should list users by id', async () => {
-    const user = await users.create({
+  it('Should list users by id', async () => {
+    const user = await Users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),
@@ -36,11 +36,27 @@ describe('Users', function() {
     expect(response.status).toBe(200)
     expect(response.body.user.name).toBe(user.name)
     expect(response.body.user.email).toBe(user.email)
-    expect(response.body.user.password).toBe(user.password)
+    expect(response.body.user).not.toHaveProperty('password')
   })
 
-  it('should list users by email', async () => {
-    const user = await users.create({
+  it('Should list users by name without password field', async () => {
+    const user = await Users.create({
+      data: {
+        name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+        email: faker.internet.email(),
+        password: faker.internet.password()
+      }
+    })
+    const response = await request(app)
+    .get(`/users/name/${user.name}`)
+    // .set('Authorization', `Bearer ${user.generateToken()}`)
+    expect(response.status).toBe(200)
+    expect(response.body.user[0].email).toBe(user.email)
+    expect(response.body.user[0]).not.toHaveProperty('password')
+  })
+
+  it('Should list users by email without password field', async () => {
+    const user = await Users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),
@@ -52,9 +68,48 @@ describe('Users', function() {
     // .set('Authorization', `Bearer ${user.generateToken()}`)
     expect(response.status).toBe(200)
     expect(response.body.user[0].email).toBe(user.email)
+    expect(response.body.user[0]).not.toHaveProperty('password')
   })
 
-  it('Should return user created', async() => {
+  it('Not should create user with existent name', async() => {
+    const existentUser = await Users.create({
+      data: {
+        name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+        email: faker.internet.email(),
+        password: faker.internet.password()
+      }
+    })
+    const user = {
+      name: existentUser.name,
+      email: faker.internet.email(),
+      password: faker.internet.password()
+    }
+    const response = await request(app)
+    .post('/users')
+    .send(user)
+    expect(response.status).toBe(400)
+  });
+
+  it('Not should create user with existent email', async() => {
+    const existentUser = await Users.create({
+      data: {
+        name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+        email: faker.internet.email(),
+        password: faker.internet.password()
+      }
+    })
+    const user = {
+      name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+      email: existentUser.email,
+      password: faker.internet.password()
+    }
+    const response = await request(app)
+    .post('/users')
+    .send(user)
+    expect(response.status).toBe(400)
+  });
+
+  it('Should create and return user', async() => {
     const user = {
       name: `${faker.name.firstName()} ${faker.name.lastName()}`,
       email: faker.internet.email(),
@@ -65,10 +120,11 @@ describe('Users', function() {
     .send(user)
     expect(response.status).toBe(201)
     expect(response.body.user.email).toBe(user.email)
+    expect(response.body.user).not.toHaveProperty('password')
   });
 
   it('Should return user updated', async() => {
-    const oldUser = await users.create({
+    const oldUser = await Users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),
@@ -91,11 +147,11 @@ describe('Users', function() {
     expect(response.status).toBe(202)
     expect(response.body.user.name).toBe(newUser.name)
     expect(response.body.user.email).toBe(newUser.email)
-    expect(response.body.user.password).toBe(newUser.password)
+    // expect(response.body.user).not.toHaveProperskjy('password')
   });
 
   it('Should fail return user deleted', async() => {
-    const user = await users.create({
+    const user = await Users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),

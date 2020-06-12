@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { Request, Response } from 'express'
+import bcrypt from 'bcryptjs'
 
 const Users = new PrismaClient().users
 
@@ -7,11 +8,20 @@ export default {
 
   async store (req: Request, res: Response) {
     try {
-      Users.create({
-        data: req.body
-      }).then((user) => {
-        return res.status(201).json({user})
+      const hash = await bcrypt.hash(req.body.password, 10)
+      const user = await Users.create({
+        data: {
+          name: req.body.name,
+          email: req.body.email,
+          password: hash
+        },
+        select: {
+          id_user: true,
+          name: true,
+          email: true
+        }
       })
+      return res.status(201).json({ user })
     } catch (errors) {
       return res.status(400).json(errors)
     }
@@ -19,7 +29,13 @@ export default {
 
   async list(_req: Request, res: Response) {
     try {
-      const users = await Users.findMany()
+      const users = await Users.findMany({
+        select: {
+          id_user: true,
+          name: true,
+          email: true
+        }
+      })
       return res.status(200).json({ users })
     } catch (error) {
       return res.status(400).json({ error })
@@ -29,7 +45,7 @@ export default {
   async delete (req: Request, res: Response) {
     try {
       const { id_user } = req.body
-      const user = await Users.delete({
+      await Users.delete({
         where: { id_user },
         select: {
           id_user: true,
@@ -49,6 +65,11 @@ export default {
       const user = await Users.update({
         where: { id_user },
         data: { name, email, password },
+        select: {
+          id_user: true,
+          name: true,
+          email: true
+        }
       })
       return res.status(202).json({ user })
     } catch (errors) {
@@ -60,7 +81,12 @@ export default {
     try {
       const id_user = parseInt(req.params.id_user)
       const user = await Users.findOne({
-        where: { id_user  }
+        where: { id_user  },
+        select: {
+          id_user: true,
+          name: true,
+          email: true
+        }
       })
       return res.status(200).json({ user })
     } catch (error) {
@@ -68,11 +94,29 @@ export default {
     }
   },
 
+  async listByName (req: Request, res: Response) {
+    try {
+      const { name } = req.params
+      const user = await Users.findMany({
+        where: { name },
+        select: {
+          id_user: true,
+          name: true,
+          email: true
+        }
+      })
+      return res.status(200).json({ user })
+    } catch (error) {
+      return res.status(400).json(error)
+    }
+  },
+
   async listByEmail (req: Request, res: Response) {
     try {
       const { email } = req.params
       const user = await Users.findMany({
-        where: { email }
+        where: { email },
+        select: { id_user: true, name: true, email: true }
       })
       return res.status(200).json({ user })
     } catch (error) {
@@ -80,31 +124,5 @@ export default {
     }
   }
 
-  // async listByType (req: Request, res: Response) {
-  // try {
-  // const { type } = req.params
-  // const { page = 1, paginate = 0 } = req.query
-  // const options = {
-  // include: {
-  // model: UserType,
-  // where: { type: { [Op.substring]: type } }
-  // },
-  // attributes: { exclude: ['password_hash', 'token'] },
-  // page,
-  // paginate: parseInt(paginate),
-  // order: [['id', 'DESC']]
-  // }
-  // if (paginate === 0) {
-  // const { rows: users, count: total } = await User.findAndCountAll(
-  // options
-  // )
-  // return res.status(200).json({ users, total })
-  // }
-  // const { docs: users, pages, total } = await User.paginate(options)
-  // return res.status(200).json({ users, pages, total })
-  // } catch (error) {
-  // return res.status(400).json({ error })
-  // }
-  // }
 }
 
