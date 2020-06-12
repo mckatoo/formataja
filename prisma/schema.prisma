@@ -52,11 +52,9 @@ model topics {
 }
 
 model users {
-  email    String
+  email    String     @unique
   id_user  Int        @default(autoincrement()) @id
-  name     String
+  name     String     @unique
   password String
   articles articles[]
-
-  @@unique([email, name], name: "users_idx")
 }
