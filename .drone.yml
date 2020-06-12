@@ -14,8 +14,6 @@ steps:
       - database
     commands:
       - npm i
-      - npx prisma generate
-      - npx prisma deploy -f
       - npx jest --runInBand --detectOpenHandles
     when:
       branch:
