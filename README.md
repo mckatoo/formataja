@@ -1,7 +1,7 @@
 # Formataja
 ## App para formatar documentos
 
-![GitHub Workflow Status (branch)](http://drone.ikatoo.com.br/api/badges/mckatoo/formataja/status.svg)
+![GitHub Workflow Status (branch)](https://cloud.drone.io/api/badges/mckatoo/formataja/status.svg)
 ![GitHub repo size](https://img.shields.io/github/repo-size/mckatoo/formataja)
 ![GitHub All Releases](https://img.shields.io/github/downloads/mckatoo/formataja/total)
 ![GitHub issues](https://img.shields.io/github/issues/mckatoo/formataja)
