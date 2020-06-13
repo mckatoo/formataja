@@ -1,6 +1,3 @@
-# IGNORE .drone.yml in master only
-.drone.*
-
 # Database
 database/*\~
 
