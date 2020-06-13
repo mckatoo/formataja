@@ -1,6 +1,9 @@
 kind: pipeline
 type: docker
 name: default
+when:
+  branch:
+  - develop
 
 steps:
 - name: backend
@@ -10,6 +13,3 @@ steps:
   commands:
   - npm i
   - npm run test
-  when:
-    branch:
-    - develop
