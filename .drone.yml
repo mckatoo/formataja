@@ -10,3 +10,6 @@ steps:
   commands:
   - npm i
   - npm run test
+  when:
+    branch:
+    - develop
