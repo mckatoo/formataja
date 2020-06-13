@@ -3,14 +3,13 @@ type: docker
 name: default
 
 steps:
-- name: frontend
+- name: backend
   image: node:12.18.0
   environment:
     DATABASE_URL: "postgresql://postgres:123123@ssh.ikatoo.com.br:5432/formataja?schema=public"
   commands:
-  - sleep 15
-  - npm install
-  - npm run test
+  - npm i
+  - npx jest --runInBand --detectOpenHandles
 
 
 # kind: pipeline
