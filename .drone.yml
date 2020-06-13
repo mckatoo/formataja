@@ -10,3 +10,13 @@ steps:
   commands:
   - npm i
   - npm run test
+  when:
+    event:
+      include:
+      - pull_request
+      - push
+    branch:
+      include:
+      - develop
+      exclude:
+      - master
