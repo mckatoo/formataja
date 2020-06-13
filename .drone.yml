@@ -1,21 +1,33 @@
 kind: pipeline
 type: docker
-name: node
-
-platform:
-  arch: amd64
+name: default
 
 steps:
-- name: backend
-  image: node:12.18.0
-  environment:
-    DATABASE_URL: "postgresql://postgres:123123@ssh.ikatoo.com.br:5432/formataja?schema=public"
-  depends_on:
-    - database
+- name: frontend
+  image: node:13.8.0
   commands:
-    - sleep 15
-    - npm i
-    - npx jest --runInBand --detectOpenHandles
-  when:
-    branch:
-    - develop
+  - npm install
+  - npm run test
+
+
+# kind: pipeline
+# type: docker
+# name: node
+
+# platform:
+  # arch: amd64
+
+# steps:
+# - name: backend
+  # image: node:12.18.0
+  # environment:
+    # DATABASE_URL: "postgresql://postgres:123123@ssh.ikatoo.com.br:5432/formataja?schema=public"
+  # depends_on:
+    # - database
+  # commands:
+    # - sleep 15
+    # - npm i
+    # - npx jest --runInBand --detectOpenHandles
+  # when:
+    # branch:
+    # - develop
