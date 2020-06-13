@@ -4,6 +4,7 @@ name: default
 
 steps:
 - name: backend
+  image: node:12.18.0
   commands:
   - npm i
   - npm run test
