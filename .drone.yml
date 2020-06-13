@@ -9,7 +9,7 @@ steps:
   - name: backend
     image: node:12.18.0
     environment:
-      DATABASE_URL: "postgresql://postgres:123123@database:5432/formataja?schema=public"
+      DATABASE_URL: "postgresql://postgres:123123@ssh.ikatoo.com.br:5432/formataja?schema=public"
     depends_on:
       - database
     commands:
@@ -19,16 +19,3 @@ steps:
     when:
       branch:
       - develop
-
-services:
-  - name: database
-    image: postgres
-    detach: true
-    ports:
-      - 5432
-    environment:
-      POSTGRES_PASSWORD: 123123
-      POSTGRES_DB: formataja
-    commands:
-      - sleep 5
-      - psql -U postgres -x 123123 -d formataja -a -f database.sql
