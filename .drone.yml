@@ -9,27 +9,4 @@ steps:
     DATABASE_URL: "postgresql://postgres:123123@ssh.ikatoo.com.br:5432/formataja?schema=public"
   commands:
   - npm i
-  - npx jest --runInBand --detectOpenHandles
-
-
-# kind: pipeline
-# type: docker
-# name: node
-
-# platform:
-  # arch: amd64
-
-# steps:
-# - name: backend
-  # image: node:12.18.0
-  # environment:
-    # DATABASE_URL: "postgresql://postgres:123123@ssh.ikatoo.com.br:5432/formataja?schema=public"
-  # depends_on:
-    # - database
-  # commands:
-    # - sleep 15
-    # - npm i
-    # - npx jest --runInBand --detectOpenHandles
-  # when:
-    # branch:
-    # - develop
+  - npm run test
