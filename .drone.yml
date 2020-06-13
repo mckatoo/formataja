@@ -5,9 +5,8 @@ name: default
 steps:
 - name: backend
   image: node:12.18.0
+  environment:
+    DATABASE_URL: "postgresql://postgres:123123@ssh.ikatoo.com.br:5432/formataja?schema=public"
   commands:
   - npm i
   - npm run test
-  when:
-    branch:
-    - develop
