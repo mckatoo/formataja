@@ -14,6 +14,14 @@ steps:
   - npm i
   - npm run test
 
+steps:
+- name: sql
+  image: postgres
+  depends_on:
+  - database
+  commands:
+  - psql -Upostgres -x123123 -dformataja -a -f./database/database.sql
+
 services:
 - name: database
   image: postgres
@@ -21,5 +29,3 @@ services:
     POSTGRES_USER: postgres
     POSTGRES_DB: formataja
     POSTGRES_PASSWORD: 123123
-  commands:
-  - psql -U postgres -x 123123 -d formataja -a -f ./database/database.sql
