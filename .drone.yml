@@ -13,16 +13,6 @@ steps:
   - sleep 15
   - npm i
   - npm run test
-  when:
-    event:
-      include:
-      - pull_request
-      - push
-    branch:
-      include:
-      - develop
-      exclude:
-      - master
 
 steps:
 - name: sql
@@ -32,7 +22,7 @@ steps:
   commands:
   - sleep 10
   - ls
-  - psql -U postgres -x 123123 -d formataja -a -f formataja/database/database.sql
+  - psql -U postgres -x 123123 -d formataja -a -f ./database/database.sql
 
 services:
 - name: database
