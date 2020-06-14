@@ -6,9 +6,10 @@ steps:
 - name: backend
   image: node:12.18.0
   environment:
-    DATABASE_URL: "postgresql://postgres:123123@database:5432/formataja?schema=public"
+    DATABASE_URL: "postgresql://postgres:@database:5432/formataja?schema=public"
   depends_on:
   - sql
+  - database
   commands:
   - sleep 15
   - npm i
@@ -19,16 +20,12 @@ steps:
   image: postgres
   depends_on:
   - database
-  environment:
-    PGPASSWORD: 123123
   commands:
   - psql -h database -U postgres -d formataja -a -f ./database/database.sql
 
 services:
 - name: database
   image: postgres
-  dangerous-public-mapped-port: [ 5432 ]
   environment:
     POSTGRES_USER: postgres
     POSTGRES_DB: formataja
-    POSTGRES_PASSWORD: 123123
