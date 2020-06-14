@@ -6,8 +6,12 @@ steps:
 - name: backend
   image: node:12.18.0
   environment:
-    DATABASE_URL: "postgresql://postgres:123123@ssh.ikatoo.com.br:5432/formataja?schema=public"
+    DRONE_STAGE_DEPENDS_ON
+    DATABASE_URL: "postgresql://postgres:123123@database:5432/formataja?schema=public"
+  depends_on:
+  - sql
   commands:
+  - sleep 15
   - npm i
   - npm run test
   when:
@@ -20,3 +24,20 @@ steps:
       - develop
       exclude:
       - master
+
+steps:
+- name: sql
+  image: postgres
+  depends_on:
+  - database
+  commands:
+  - sleep 10
+  - psql -U postgres -x 123123 -d formataja -a -f database/database.sql
+
+services:
+- name: database
+  image: postgres
+  environment:
+    POSTGRES_USER: postgres
+    POSTGRES_DB: formataja
+    POSTGRES_PASSWORD: 123123
