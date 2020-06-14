@@ -25,7 +25,7 @@ const auth = (req: Request, res: Response, next:NextFunction) => {
       return res.status(401).json({ error: 'Token invalid!' })
     }
 
-    // req.userId = decoded.id
+    // req.user_id = decoded.id
     return next()
   })
 
