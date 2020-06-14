@@ -21,7 +21,8 @@ steps:
   depends_on:
   - database
   commands:
-  - psql -h database -U postgres -d formataja -a -f ./database/database.sql
+  - psql -U postgres -d test -h database
+  # - psql -h database -U postgres -d formataja -a -f ./database/database.sql
 
 services:
 - name: database
