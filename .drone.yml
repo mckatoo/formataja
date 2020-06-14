@@ -22,11 +22,12 @@ steps:
   environment:
     PGPASSWORD: 123123
   commands:
-  - psql -U postgres -d formataja -a -f ./database/database.sql
+  - psql -h database -U postgres -d formataja -a -f ./database/database.sql
 
 services:
 - name: database
   image: postgres
+  ports: [ 5432 ]
   environment:
     POSTGRES_USER: postgres
     POSTGRES_DB: formataja
