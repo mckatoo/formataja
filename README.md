@@ -26,8 +26,8 @@
 ## A fazer
 
 ### Cadastro de usuários
+- [x] Autenticação
 - [ ] Autorização
-- [ ] Autenticação
 
 ### Cadastro de artigos
 - [ ] Um usuário poder ter vários artigos

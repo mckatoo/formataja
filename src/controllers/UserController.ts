@@ -1,8 +1,10 @@
 import { PrismaClient } from '@prisma/client'
 import { Request, Response } from 'express'
 import bcrypt from 'bcryptjs'
+import TokenService from '../services/TokenService'
 
 const Users = new PrismaClient().users
+const { generateToken } = new TokenService()
 
 export default {
 
@@ -21,7 +23,10 @@ export default {
           email: true
         }
       })
-      return res.status(201).json({ user })
+      return res.status(201).json({
+        user,
+        token: generateToken({ id: user.id_user })
+      })
     } catch (errors) {
       return res.status(400).json(errors)
     }
@@ -71,7 +76,10 @@ export default {
           email: true
         }
       })
-      return res.status(202).json({ user })
+      return res.status(202).json({
+        user,
+        token: generateToken({ id: user.id_user })
+      })
     } catch (errors) {
       return res.status(400).json(errors)
     }

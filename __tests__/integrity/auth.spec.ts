@@ -17,7 +17,7 @@ describe('Authentication', function() {
     })
   })
 
-  it('Should return login accepted', async() => {
+  it('Should return login accepted and return token', async() => {
     const password = faker.internet.password()
     const hash = await bcrypt.hash(password, 10)
     const user = await Users.create({
@@ -32,6 +32,7 @@ describe('Authentication', function() {
     .post('/login')
     .send({ user })
     expect(response.status).toBe(202)
+    expect(response.body).toHaveProperty('token')
   });
 
   it('Should deny access with email not found', async() => {
