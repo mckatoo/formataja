@@ -6,7 +6,6 @@ steps:
 - name: backend
   image: node:12.18.0
   environment:
-    DRONE_STAGE_DEPENDS_ON
     DATABASE_URL: "postgresql://postgres:123123@database:5432/formataja?schema=public"
   depends_on:
   - sql
@@ -14,6 +13,16 @@ steps:
   - sleep 15
   - npm i
   - npm run test
+  when:
+    event:
+      include:
+      - pull_request
+      - push
+    branch:
+      include:
+      - develop
+      exclude:
+      - master
 
 steps:
 - name: sql
