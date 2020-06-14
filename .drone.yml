@@ -19,8 +19,10 @@ steps:
   image: postgres
   depends_on:
   - database
+  environment:
+    PGPASSWORD: 123123
   commands:
-  - psql -Upostgres -x123123 -dformataja -a -f./database/database.sql
+  - psql -U postgres -d formataja -a -f ./database/database.sql
 
 services:
 - name: database
