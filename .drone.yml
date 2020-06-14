@@ -27,7 +27,7 @@ steps:
 services:
 - name: database
   image: postgres
-  ports: [ 5432 ]
+  dangerous-public-mapped-port: [ 5432 ]
   environment:
     POSTGRES_USER: postgres
     POSTGRES_DB: formataja
