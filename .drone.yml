@@ -31,7 +31,8 @@ steps:
   - database
   commands:
   - sleep 10
-  - psql -U postgres -x 123123 -d formataja -a -f database/database.sql
+  - ls
+  - psql -U postgres -x 123123 -d formataja -a -f formataja/database/database.sql
 
 services:
 - name: database
