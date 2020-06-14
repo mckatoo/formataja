@@ -14,16 +14,6 @@ steps:
   - sleep 15
   - npm i
   - npm run test
-  when:
-    event:
-      include:
-      - pull_request
-      - push
-    branch:
-      include:
-      - develop
-      exclude:
-      - master
 
 steps:
 - name: sql
