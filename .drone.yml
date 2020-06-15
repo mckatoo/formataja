@@ -26,7 +26,7 @@ steps:
 
 services:
 - name: database
-  image: postgres
+  image: postgres:9-alpine
   environment:
     POSTGRES_USER: postgres
     POSTGRES_DB: formataja
