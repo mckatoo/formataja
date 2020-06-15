@@ -16,8 +16,10 @@ name: default
   # - npm run test
 
 steps:
-- name: test
+- name: sql
   image: postgres
+  depends_on:
+  - database
   commands:
   - psql -U postgres -d test -h database
 
