@@ -16,7 +16,7 @@ steps:
   # - npm run test
 
 - name: test
-  image: postgres:9-alpine
+  image: postgres
   commands:
   - sleep 15
   - psql -U postgres -d test -h database
@@ -27,3 +27,4 @@ services:
   environment:
     POSTGRES_USER: postgres
     POSTGRES_DB: test
+    POSTGRES_HOST_AUTH_METHOD: trust
