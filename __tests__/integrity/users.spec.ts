@@ -22,6 +22,68 @@ describe('Users', function() {
 
   })
 
+  it('Should return No token provided!', async() => {
+    await Users.create({
+      data: {
+        name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+        email: faker.internet.email(),
+        password: faker.internet.password()
+      }
+    })
+    const response = await request(app)
+    .get('/users')
+    expect(response.status).toBe(401)
+    expect(response.header).not.toHaveProperty('authorization')
+    expect(response.body.error).toBe('No token provided!')
+  });
+
+  it('Should return Token error!', async() => {
+    await Users.create({
+      data: {
+        name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+        email: faker.internet.email(),
+        password: faker.internet.password()
+      }
+    })
+    const response = await request(app)
+    .get('/users')
+    .set('authorization', `Bearer `)
+    expect(response.status).toBe(401)
+    expect(response.header).not.toHaveProperty('authorization')
+    expect(response.body.error).toBe('Token error!')
+  });
+
+  it('Should return Token malformatted!', async() => {
+    const user = await Users.create({
+      data: {
+        name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+        email: faker.internet.email(),
+        password: faker.internet.password()
+      }
+    })
+    const response = await request(app)
+    .get('/users')
+    .set('authorization', `fsdf ${generateToken({ id: user.id_user })}`)
+    expect(response.status).toBe(401)
+    expect(response.header).not.toHaveProperty('authorization')
+    expect(response.body.error).toBe('Token malformatted!')
+  });
+
+  it('Should return Token invalid!', async() => {
+    await Users.create({
+      data: {
+        name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+        email: faker.internet.email(),
+        password: faker.internet.password()
+      }
+    })
+    const response = await request(app)
+    .get('/users')
+    .set('authorization', `Bearer 4${generateToken({ id: 45454 })}`)
+    expect(response.status).toBe(401)
+    expect(response.body.error).toBe('Token invalid!')
+  });
+
   it('Should return user list', async() => {
     const user = await Users.create({
       data: {
@@ -32,7 +94,7 @@ describe('Users', function() {
     })
     const response = await request(app)
     .get('/users')
-    .set('Authorization', `Bearer ${generateToken({ id: user.id_user })}`)
+    .set('authorization', `Bearer ${generateToken({ id: user.id_user })}`)
     expect(response.status).toBe(200)
   });
 
