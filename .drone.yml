@@ -18,6 +18,7 @@ steps:
 - name: test
   image: postgres:9-alpine
   commands:
+  - sleep 15
   - psql -U postgres -d test -h database
 
 services:
