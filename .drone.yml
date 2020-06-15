@@ -15,18 +15,14 @@ steps:
   - npm i
   - npm run test
 
-steps:
-- name: sql
-  image: postgres
-  depends_on:
-  - database
+- name: test
+  image: postgres:9-alpine
   commands:
-  - psql -U postgres -d formataja -h database
-  # - psql -h database -U postgres -d formataja -a -f ./database/database.sql
+  - psql -U postgres -d test -h database
 
 services:
 - name: database
   image: postgres:9-alpine
   environment:
     POSTGRES_USER: postgres
-    POSTGRES_DB: formataja
+    POSTGRES_DB: test
