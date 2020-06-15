@@ -18,7 +18,10 @@ name: default
 steps:
 - name: sql
   image: postgres
+  depends_on:
+  - database
   commands:
+  - sleep 15
   - psql -U postgres -d test -h database
 
 services:
