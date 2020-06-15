@@ -22,7 +22,7 @@ steps:
   - database
   commands:
   - sleep 15
-  - psql -U postgres -d test -h database
+  - psql -U postgres -d test -h database -a -f database/database.sql
 
 services:
 - name: database
