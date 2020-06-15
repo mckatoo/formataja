@@ -18,8 +18,6 @@ name: default
 steps:
 - name: sql
   image: postgres
-  depends_on:
-  - database
   commands:
   - psql -U postgres -d test -h database
 
