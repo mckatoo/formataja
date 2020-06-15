@@ -3,28 +3,30 @@ type: docker
 name: default
 
 steps:
-# - name: backend
-  # image: node:12.18.0
-  # environment:
-    # DATABASE_URL: "postgresql://postgres:@database:5432/formataja?schema=public"
-  # depends_on:
-  # - sql
-  # - database
-  # commands:
-  # - sleep 15
-  # - npm i
-  # - npm run test
-
-- name: test
-  image: postgres
+- name: backend
+  image: node:12.18.0
+  environment:
+    DATABASE_URL: "postgresql://postgres:@database:5432/formataja?schema=public"
+  depends_on:
+  - sql
+  - database
   commands:
   - sleep 15
-  - psql -U postgres -d test -h database
+  - npm i
+  - npm run test
+
+steps:
+- name: sql
+  image: postgres
+  depends_on:
+  - database
+  commands:
+  - psql -h database -U postgres -d formataja -a -f ./database/database.sql
 
 services:
 - name: database
-  image: postgres:9-alpine
+  image: postgres
   environment:
     POSTGRES_USER: postgres
-    POSTGRES_DB: test
+    POSTGRES_DB: formataja
     POSTGRES_HOST_AUTH_METHOD: trust
