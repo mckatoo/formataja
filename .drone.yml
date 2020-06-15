@@ -15,7 +15,7 @@ name: default
   # - npm i
   # - npm run test
 
-teps:
+steps:
 - name: test
   image: postgres
   commands:
