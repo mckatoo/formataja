@@ -2,31 +2,29 @@ kind: pipeline
 type: docker
 name: default
 
-steps:
-- name: backend
-  image: node:12.18.0
-  environment:
-    DATABASE_URL: "postgresql://postgres:@database:5432/formataja?schema=public"
-  depends_on:
-  - sql
-  - database
-  commands:
-  - sleep 15
-  - npm i
-  - npm run test
+# steps:
+# - name: backend
+  # image: node:12.18.0
+  # environment:
+    # DATABASE_URL: "postgresql://postgres:@database:5432/formataja?schema=public"
+  # depends_on:
+  # - sql
+  # - database
+  # commands:
+  # - sleep 15
+  # - npm i
+  # - npm run test
 
-steps:
-- name: sql
+teps:
+- name: test
   image: postgres
-  depends_on:
-  - database
   commands:
-  - psql -h database -U postgres -d formataja -a -f ./database/database.sql
+  - psql -U postgres -d test -h database
 
 services:
 - name: database
-  image: postgres
+  image: postgres:9-alpine
   environment:
     POSTGRES_USER: postgres
-    POSTGRES_DB: formataja
+    POSTGRES_DB: test
     POSTGRES_HOST_AUTH_METHOD: trust
