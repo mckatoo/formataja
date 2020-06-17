@@ -3,7 +3,9 @@ import faker from 'faker'
 import request from 'supertest'
 import { PrismaClient } from '@prisma/client'
 import app from '../../src/app'
+import TokenService from '../../src/services/TokenService'
 
+const { generateToken } = new TokenService()
 const Users = new PrismaClient().users
 
 describe('Authentication', function() {
