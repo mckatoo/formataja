@@ -88,4 +88,3 @@ describe('Authentication', function() {
   });
 
 })
-
