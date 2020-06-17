@@ -1,8 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import jwtDecode from 'jwt-decode'
 import authConfig from '../config/auth.json';
-import {decode} from 'punycode';
 
 const auth = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
