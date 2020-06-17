@@ -4,7 +4,7 @@
   "description": "App para formatar documentos",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "dev": "nodemon --exec sucrase-node src/server",
     "build": "sucrase ./src -d ./dist --transforms typescript,imports",
     "start": "node dist/server"
