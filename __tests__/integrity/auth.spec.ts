@@ -70,5 +70,20 @@ describe('Authentication', function() {
     expect(response.body.error).toBe('Password incorrect!')
   });
 
+  it('Should return id_user property in requisition', async() => {
+    const user = await Users.create({
+      data: {
+        name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+        email: faker.internet.email(),
+        password: faker.internet.password()
+      }
+    })
+    const response = await request(app)
+    .get('/')
+    .set('authorization', `Bearer ${generateToken({ id: user.id_user })}`)
+    expect(response.body.user_id).toBe(user.id_user)
+    expect(response.status).toBe(200)
+  });
+
 })
 
