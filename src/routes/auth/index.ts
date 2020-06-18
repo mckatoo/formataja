@@ -1,16 +1,16 @@
 import { Router } from 'express'
 import AuthController from '../../controllers/AuthController'
 
-const authRoutes = Router()
+const routes = Router()
 
-// authRoutes.post('/', (req, res) => {
+// routes.post('/', (req, res) => {
   // res.status(200).send()
 // })
-authRoutes.post('/', AuthController.login)
-// authRoutes.get('/id/:id_user', UserController.listById)
-// authRoutes.get('/email/:email', UserController.listByEmail)
-// authRoutes.post('/', UserController.store)
-// authRoutes.patch('/', UserController.update)
-// authRoutes.delete('/', UserController.delete)
+routes.post('/', AuthController.login)
+// routes.get('/id/:id_user', UserController.listById)
+// routes.get('/email/:email', UserController.listByEmail)
+// routes.post('/', UserController.store)
+// routes.patch('/', UserController.update)
+// routes.delete('/', UserController.delete)
 
-export default authRoutes
+export default routes

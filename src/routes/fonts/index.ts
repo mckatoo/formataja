@@ -1,13 +1,13 @@
 import { Router } from 'express'
 import FontController from '../../controllers/FontController'
 
-const usersRoutes = Router()
+const routes = Router()
 
-usersRoutes.get('/', FontController.list)
-usersRoutes.get('/id/:id_font', FontController.listById)
-usersRoutes.get('/name/:name', FontController.listByName)
-usersRoutes.post('/', FontController.store)
-usersRoutes.patch('/', FontController.update)
-usersRoutes.delete('/', FontController.delete)
+routes.get('/', FontController.list)
+routes.get('/id/:id_font', FontController.listById)
+routes.get('/name/:name', FontController.listByName)
+routes.post('/', FontController.store)
+routes.patch('/', FontController.update)
+routes.delete('/', FontController.delete)
 
-export default usersRoutes
+export default routes
