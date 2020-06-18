@@ -8,39 +8,12 @@ const { generateToken } = new TokenService();
 export default {
   async store(req: Request, res: Response) {
     try {
-      const {
-        name,
-        left_margin,
-        capitalize,
-        lowercase,
-        indent_paragraph,
-        bold,
-        top_margin,
-        italic,
-        font_size,
-        id_font,
-        right_margin,
-        underlined,
-        uppercase,
-        botton_margin,
-      } = req.body;
       const format = await formats.create({
         data: {
-          name,
-          left_margin,
-          capitalize,
-          lowercase,
-          indent_paragraph,
-          bold,
-          top_margin,
-          italic,
-          font_size,
-          right_margin,
-          underlined,
-          uppercase,
-          botton_margin,
+          ...req.body,
           fonts: {
-          }
+            connect: { id_font: req.body.fonts.id_font },
+          },
         },
         select: {
           id_format: true,
@@ -95,10 +68,17 @@ export default {
 
   async update(req: Request, res: Response) {
     try {
-      const { id_format, name } = req.body;
+      const { id_format } = req.body;
       const format = await formats.update({
         where: { id_format },
-        data: { name },
+        data: {
+          ...req.body,
+          fonts: {
+            connect: {
+              id_font: req.body.fonts.id_font
+            }
+          }
+        },
         select: {
           id_format: true,
           name: true,
