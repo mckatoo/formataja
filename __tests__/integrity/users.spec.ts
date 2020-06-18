@@ -10,6 +10,9 @@ const { users } = prisma
 
 describe('Users', function() {
 
+  beforeAll(async() => {
+  })
+
   afterAll(async () => {
     await users.deleteMany({
       where: {

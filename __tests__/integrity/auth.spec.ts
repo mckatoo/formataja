@@ -10,6 +10,9 @@ const prisma = new PrismaClient()
 const { users } = prisma
 
 describe('Authentication', function() {
+  beforeAll(async() => {
+  })
+
   afterAll(async() => {
     await users.deleteMany({
       where: {
