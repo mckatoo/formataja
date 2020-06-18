@@ -3,7 +3,8 @@ import { Request, Response } from 'express'
 import bcrypt from 'bcryptjs'
 import TokenService from '../services/TokenService'
 
-const Users = new PrismaClient().users
+const prisma = new PrismaClient()
+const { users }= prisma
 const { generateToken } = new TokenService()
 
 export default {
@@ -11,12 +12,9 @@ export default {
   async store (req: Request, res: Response) {
     try {
       const hash = await bcrypt.hash(req.body.password, 10)
-      const user = await Users.create({
-        data: {
-          name: req.body.name,
-          email: req.body.email,
-          password: hash
-        },
+      req.body.password = hash
+      const user = await users.create({
+        data: req.body,
         select: {
           id_user: true,
           name: true,
@@ -29,28 +27,32 @@ export default {
       })
     } catch (errors) {
       return res.status(400).json(errors)
+    } finally {
+      await prisma.disconnect()
     }
   },
 
   async list(_req: Request, res: Response) {
     try {
-      const users = await Users.findMany({
+      const users_list = await users.findMany({
         select: {
           id_user: true,
           name: true,
           email: true
         }
       })
-      return res.status(200).json({ users })
+      return res.status(200).json({ users: users_list })
     } catch (error) {
       return res.status(400).json({ error })
+    } finally {
+      await prisma.disconnect()
     }
   },
 
   async delete (req: Request, res: Response) {
     try {
       const { id_user } = req.body
-      await Users.delete({
+      await users.delete({
         where: { id_user },
         select: {
           id_user: true,
@@ -61,15 +63,18 @@ export default {
       return res.status(204).send()
     } catch (errors) {
       return res.status(404).json(errors)
+    } finally {
+      await prisma.disconnect()
     }
   },
 
   async update (req: Request, res: Response) {
     try {
       const { id_user, name, email, password } = req.body
-      const user = await Users.update({
+      const hash = await bcrypt.hash(password, 10)
+      const user = await users.update({
         where: { id_user },
-        data: { name, email, password },
+        data: { name, email, password: hash },
         select: {
           id_user: true,
           name: true,
@@ -88,7 +93,7 @@ export default {
   async listById (req: Request, res: Response) {
     try {
       const id_user = parseInt(req.params.id_user)
-      const user = await Users.findOne({
+      const user = await users.findOne({
         where: { id_user  },
         select: {
           id_user: true,
@@ -105,7 +110,7 @@ export default {
   async listByName (req: Request, res: Response) {
     try {
       const { name } = req.params
-      const user = await Users.findMany({
+      const users_list = await users.findMany({
         where: { name },
         select: {
           id_user: true,
@@ -113,7 +118,7 @@ export default {
           email: true
         }
       })
-      return res.status(200).json({ user })
+      return res.status(200).json({ users: users_list })
     } catch (error) {
       return res.status(400).json(error)
     }
@@ -122,11 +127,11 @@ export default {
   async listByEmail (req: Request, res: Response) {
     try {
       const { email } = req.params
-      const user = await Users.findMany({
+      const users_list = await users.findMany({
         where: { email },
         select: { id_user: true, name: true, email: true }
       })
-      return res.status(200).json({ user })
+      return res.status(200).json({ users: users_list })
     } catch (error) {
       return res.status(400).json(error)
     }

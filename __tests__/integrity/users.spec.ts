@@ -127,8 +127,8 @@ describe('Users', function() {
     .get(`/users/name/${user.name}`)
     .set('Authorization', `Bearer ${generateToken({ id: user.id_user })}`)
     expect(response.status).toBe(200)
-    expect(response.body.user[0].email).toBe(user.email)
-    expect(response.body.user[0]).not.toHaveProperty('password')
+    expect(response.body.users[0].email).toBe(user.email)
+    expect(response.body.users[0]).not.toHaveProperty('password')
   })
 
   it('Should list users by email without password field', async () => {
@@ -143,8 +143,8 @@ describe('Users', function() {
     .get(`/users/email/${user.email}`)
     .set('Authorization', `Bearer ${generateToken({ id: user.id_user })}`)
     expect(response.status).toBe(200)
-    expect(response.body.user[0].email).toBe(user.email)
-    expect(response.body.user[0]).not.toHaveProperty('password')
+    expect(response.body.users[0].email).toBe(user.email)
+    expect(response.body.users[0]).not.toHaveProperty('password')
   })
 
   it('Not should create user with existent name', async() => {

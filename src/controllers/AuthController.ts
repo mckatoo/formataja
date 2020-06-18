@@ -3,7 +3,8 @@ import bcrypt from 'bcryptjs'
 import { Request, Response } from 'express'
 import TokenService from '../services/TokenService'
 
-const Users = new PrismaClient().users
+const prisma = new PrismaClient();
+const { users } = prisma
 const { generateToken } = new TokenService()
 
 export default {
@@ -11,7 +12,7 @@ export default {
   async login(req: Request, res: Response) {
     try {
       const { email, password } = req.body.user;
-      const user = await Users.findOne({
+      const user = await users.findOne({
         where: {
           email
         }
