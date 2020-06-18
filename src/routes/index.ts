@@ -3,6 +3,7 @@ import auth from '../middlewares/auth'
 import authRoutes from './auth'
 import usersRoutes from './users'
 import fontsRoutes from './fonts'
+import formatsRoutes from './formats'
 
 const routes = Router()
 
@@ -13,5 +14,6 @@ routes.get('/', (req, res) => {
 })
 routes.use('/users', usersRoutes)
 routes.use('/fonts', fontsRoutes)
+routes.use('/formats', formatsRoutes)
 
 export default routes
