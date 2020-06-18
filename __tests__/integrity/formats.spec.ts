@@ -6,20 +6,14 @@ import TokenService from '../../src/services/TokenService';
 
 const { generateToken } = new TokenService();
 const prisma = new PrismaClient();
-const { users, formats } = prisma;
+const { users, formats, fonts } = prisma;
 interface User {
   id_user?: number;
   name: string;
   email: string;
   password: string;
 }
-
-let user: User = {
-  id_user: 0,
-  name: '',
-  email: '',
-  password: '',
-};
+let user: User;
 
 describe('Formats', function () {
   beforeAll(async () => {
@@ -104,14 +98,19 @@ describe('Formats', function () {
       .get(`/formats/name/${format.name}`)
       .set('authorization', `Bearer ${generateToken({ id: user.id_user })}`);
     expect(response.status).toBe(200);
-    // expect(response.body.formats.name).toBe(format.name);
-    // expect(response.body.formats.fonts.name).toBe(format.fonts.name);
+    expect(response.body).toHaveProperty('formats');
   });
 
   it('Should create and return format', async () => {
+    const font = await fonts.create({
+      data: {
+        name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+      },
+    });
     const format = {
       name: `${faker.name.firstName()} ${faker.name.lastName()}`,
-    }
+      fonts: font,
+    };
     const response = await request(app)
       .post('/formats')
       .send(format)
@@ -119,42 +118,60 @@ describe('Formats', function () {
       .set('Authorization', `Bearer ${generateToken({ id: user.id_user })}`);
     expect(response.status).toBe(201);
     expect(response.body.format.name).toBe(format.name);
+    expect(response.body.format.fonts.id_font).toBe(format.fonts.id_font);
   });
 
-  // it('Should return font updated with new token', async () => {
-  //   const oldFont = await formats.create({
-  //     data: {
-  //       name: `${faker.name.firstName()} ${faker.name.lastName()}`,
-  //     },
-  //   });
-  //   const newFont = {
-  //     name: `${faker.name.firstName()} ${faker.name.lastName()}`,
-  //   };
-  //   const response = await request(app)
-  //     .patch('/formats')
-  //     .send({
-  //       id_font: oldFont.id_font,
-  //       name: newFont.name,
-  //     })
-  //     .set('Accept', 'application/json')
-  //     .set('Authorization', `Bearer ${generateToken({ id: oldFont.id_font })}`);
-  //   expect(response.status).toBe(202);
-  //   expect(response.body.font.name).toBe(newFont.name);
-  // });
-  //
-  // it('Should fail return font deleted', async () => {
-  //   const font = await formats.create({
-  //     data: {
-  //       name: `${faker.name.firstName()} ${faker.name.lastName()}`,
-  //     },
-  //   });
-  //   const response = await request(app)
-  //     .delete('/formats')
-  //     .send({
-  //       id_font: font.id_font,
-  //     })
-  //     .set('Accept', 'application/json')
-  //     .set('Authorization', `Bearer ${generateToken({ id: user.id_user })}`);
-  //   expect(response.status).toBe(204);
-  // });
+  it('Should return format updated.', async () => {
+    const newFont = await fonts.create({
+      data: {
+        name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+      },
+    });
+    const oldFormat = await formats.create({
+      data: {
+        name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+        fonts: {
+          create: {
+            name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+          },
+        },
+      },
+    });
+    const newFormat = {
+      id_format: oldFormat.id_format,
+      name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+      fonts: newFont,
+    };
+    const response = await request(app)
+      .patch('/formats')
+      .send(newFormat)
+      .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${generateToken({ id: user.id_user })}`);
+    expect(response.status).toBe(202);
+    expect(response.body.format.id_format).toBe(oldFormat.id_format);
+    expect(response.body.format.name).toBe(newFormat.name);
+    expect(response.body.format.fonts.id_font).toBe(newFont.id_font);
+    expect(response.body.format.fonts.name).toBe(newFont.name);
+  });
+
+  it('Should delete format.', async () => {
+    const format = await formats.create({
+      data: {
+        name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+        fonts: {
+          create: {
+            name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+          },
+        },
+      },
+    });
+    const response = await request(app)
+      .delete('/formats')
+      .send({
+        id_format: format.id_format,
+      })
+      .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${generateToken({ id: user.id_user })}`);
+    expect(response.status).toBe(204);
+  });
 });
