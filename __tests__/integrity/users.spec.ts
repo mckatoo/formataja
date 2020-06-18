@@ -5,25 +5,24 @@ import app from '../../src/app'
 import TokenService from '../../src/services/TokenService'
 
 const { generateToken } = new TokenService()
-const Users = new PrismaClient().users
+const prisma = new PrismaClient()
+const { users } = prisma
 
 describe('Users', function() {
-  beforeAll(async() => {
-    await Users.deleteMany({
+
+  afterAll(async () => {
+    await users.deleteMany({
       where: {
         id_user: {
-          gt: 0
-        }
-      }
-    })
-  })
-
-  beforeEach(async() => {
-
-  })
+          gt: 0,
+        },
+      },
+    });
+    await prisma.disconnect()
+  });
 
   it('Should return No token provided!', async() => {
-    await Users.create({
+    await users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),
@@ -38,7 +37,7 @@ describe('Users', function() {
   });
 
   it('Should return Token error!', async() => {
-    await Users.create({
+    await users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),
@@ -54,7 +53,7 @@ describe('Users', function() {
   });
 
   it('Should return Token malformatted!', async() => {
-    const user = await Users.create({
+    const user = await users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),
@@ -70,7 +69,7 @@ describe('Users', function() {
   });
 
   it('Should return Token invalid!', async() => {
-    await Users.create({
+    await users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),
@@ -85,7 +84,7 @@ describe('Users', function() {
   });
 
   it('Should return user list', async() => {
-    const user = await Users.create({
+    const user = await users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),
@@ -99,7 +98,7 @@ describe('Users', function() {
   });
 
   it('Should list users by id', async () => {
-    const user = await Users.create({
+    const user = await users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),
@@ -116,7 +115,7 @@ describe('Users', function() {
   })
 
   it('Should list users by name without password field', async () => {
-    const user = await Users.create({
+    const users_list = await users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),
@@ -124,15 +123,15 @@ describe('Users', function() {
       }
     })
     const response = await request(app)
-    .get(`/users/name/${user.name}`)
-    .set('Authorization', `Bearer ${generateToken({ id: user.id_user })}`)
+    .get(`/users/name/${users_list.name}`)
+    .set('Authorization', `Bearer ${generateToken({ id: users_list.id_user })}`)
     expect(response.status).toBe(200)
-    expect(response.body.users[0].email).toBe(user.email)
+    expect(response.body.users[0].email).toBe(users_list.email)
     expect(response.body.users[0]).not.toHaveProperty('password')
   })
 
   it('Should list users by email without password field', async () => {
-    const user = await Users.create({
+    const users_list = await users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),
@@ -140,15 +139,15 @@ describe('Users', function() {
       }
     })
     const response = await request(app)
-    .get(`/users/email/${user.email}`)
-    .set('Authorization', `Bearer ${generateToken({ id: user.id_user })}`)
+    .get(`/users/email/${users_list.email}`)
+    .set('Authorization', `Bearer ${generateToken({ id: users_list.id_user })}`)
     expect(response.status).toBe(200)
-    expect(response.body.users[0].email).toBe(user.email)
+    expect(response.body.users[0].email).toBe(users_list.email)
     expect(response.body.users[0]).not.toHaveProperty('password')
   })
 
   it('Not should create user with existent name', async() => {
-    const existentUser = await Users.create({
+    const existentUser = await users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),
@@ -169,7 +168,7 @@ describe('Users', function() {
   });
 
   it('Not should create user with existent email', async() => {
-    const existentUser = await Users.create({
+    const existentUser = await users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),
@@ -190,7 +189,7 @@ describe('Users', function() {
   });
 
   it('Should create and return user with token', async() => {
-    const existentUser = await Users.create({
+    const existentUser = await users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),
@@ -214,7 +213,7 @@ describe('Users', function() {
   });
 
   it('Should return user updated with new token', async() => {
-    const oldUser = await Users.create({
+    const oldUser = await users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),
@@ -244,7 +243,7 @@ describe('Users', function() {
   });
 
   it('Should fail return user deleted', async() => {
-    const user = await Users.create({
+    const user = await users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),

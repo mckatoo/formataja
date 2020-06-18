@@ -6,23 +6,25 @@ import app from '../../src/app'
 import TokenService from '../../src/services/TokenService'
 
 const { generateToken } = new TokenService()
-const Users = new PrismaClient().users
+const prisma = new PrismaClient()
+const { users } = prisma
 
 describe('Authentication', function() {
-  beforeAll(async() => {
-    await Users.deleteMany({
+  afterAll(async() => {
+    await users.deleteMany({
       where: {
         id_user: {
           gt: 0
         }
       }
     })
+    await prisma.disconnect()
   })
 
   it('Should return login accepted and return token', async() => {
     const password = faker.internet.password()
     const hash = await bcrypt.hash(password, 10)
-    const user = await Users.create({
+    const user = await users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),
@@ -39,7 +41,7 @@ describe('Authentication', function() {
 
   it('Should deny access with email not found', async() => {
     const hash = await bcrypt.hash(faker.internet.password(), 10)
-    const user = await Users.create({
+    const user = await users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),
@@ -57,7 +59,7 @@ describe('Authentication', function() {
 
   it('Should deny access with password incorrect.', async() => {
     const hash = await bcrypt.hash(faker.internet.password(), 10)
-    const user = await Users.create({
+    const user = await users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),
@@ -73,7 +75,7 @@ describe('Authentication', function() {
   });
 
   it('Should return id_user property in requisition', async() => {
-    const user = await Users.create({
+    const user = await users.create({
       data: {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         email: faker.internet.email(),

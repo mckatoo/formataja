@@ -32,6 +32,8 @@ export default {
       })
     } catch (errors) {
       return res.status(400).json(errors)
+    } finally {
+      await prisma.disconnect()
     }
   },
 

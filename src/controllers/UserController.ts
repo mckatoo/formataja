@@ -87,6 +87,8 @@ export default {
       })
     } catch (errors) {
       return res.status(400).json(errors)
+    } finally {
+      await prisma.disconnect()
     }
   },
 
@@ -104,6 +106,8 @@ export default {
       return res.status(200).json({ user })
     } catch (error) {
       return res.status(400).json({ error })
+    } finally {
+      await prisma.disconnect()
     }
   },
 
@@ -121,6 +125,8 @@ export default {
       return res.status(200).json({ users: users_list })
     } catch (error) {
       return res.status(400).json(error)
+    } finally {
+      await prisma.disconnect()
     }
   },
 
@@ -134,6 +140,8 @@ export default {
       return res.status(200).json({ users: users_list })
     } catch (error) {
       return res.status(400).json(error)
+    } finally {
+      await prisma.disconnect()
     }
   }
 

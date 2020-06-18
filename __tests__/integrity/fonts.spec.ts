@@ -5,7 +5,8 @@ import app from '../../src/app';
 import TokenService from '../../src/services/TokenService';
 
 const { generateToken } = new TokenService();
-const { users, fonts } = new PrismaClient();
+const prisma = new PrismaClient();
+const { users, fonts } = prisma
 interface User {
   id_user?: number;
   name: string;
@@ -39,6 +40,7 @@ describe('Fonts', function () {
         },
       },
     });
+    await prisma.disconnect()
   })
 
   it('Should return fonts list', async () => {

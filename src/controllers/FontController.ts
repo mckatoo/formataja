@@ -98,6 +98,8 @@ export default {
       return res.status(200).json({ font })
     } catch (error) {
       return res.status(400).json({ error })
+    } finally {
+      await prisma.disconnect()
     }
   },
 
@@ -114,6 +116,8 @@ export default {
       return res.status(200).json({ fonts_list })
     } catch (error) {
       return res.status(400).json(error)
+    } finally {
+      await prisma.disconnect()
     }
 
   }
