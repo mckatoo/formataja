@@ -4,8 +4,8 @@
   "description": "App para formatar documentos",
   "main": "index.js",
   "scripts": {
-    "test": "jest --runInBand --detectOpenHandles",
-    "test-cov": "jest --runInBand --detectOpenHandles --coverage && x-www-browser ./__tests__/coverage/lcov-report/index.html",
+    "test": "jest",
+    "test-cov": "jest --coverage && x-www-browser ./__tests__/coverage/lcov-report/index.html",
     "dev": "nodemon --exec sucrase-node src/server",
     "build": "sucrase ./src -d ./dist --transforms typescript,imports",
     "start": "node dist/server"
