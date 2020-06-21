@@ -1,3 +1,8 @@
+ File              : README.md
+ Author            : Milton Carlos Katoo <mckatoo@gmail.com>
+ Date              : 21.06.2020
+ Last Modified Date: 21.06.2020
+ Last Modified By  : Milton Carlos Katoo <mckatoo@gmail.com>
 # Formataja
 ## App para formatar documentos
 
@@ -16,6 +21,9 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/mckatoo/formataja)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/mckatoo/formataja)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
+
+[![js-standard-style](https://cdn.rawgit.com/standard/standard/master/badge.svg)](http://standardjs.com)
 
 ## Feito
 
@@ -23,26 +31,28 @@
 - [x] Testes
 - [x] Rotas
 - [x] Controller
+### Cadastro de usuários
+- [x] Autenticação
+- [x] Um usuário poder ter vários artigos
+
+### Cadastro de artigos
+- [x] Um artigo tem somente um(a):
 
 ## A fazer
 
 ### Cadastro de usuários
-- [x] Autenticação
-- [ ] Autorização
+- [x] Autorização
+    - [x] Formatação:
+        - [x] Configuração de margens:
+        - [x] O texto todo tem uma formatação além de cada elemento que pode ser:
+            - [x] Recuo
+            - [x] Alinhento
+            - [x] Tamanho de papel (A4, Carta, etc)
+            - [x] Recuo de primeira linha do paragrafo (Opcional)
+            - [x] Citações com mais de 3 linhas (Opcional)
+- [x] Título do artigo
 
 ### Cadastro de artigos
-- [ ] Um usuário poder ter vários artigos
-- [ ] Um artigo pode ter vários tópicos
-- [ ] Um artigo tem somente um(a):
-    - [ ] Formatação:
-        - [ ] Configuração de margens:
-        - [ ] O texto todo tem uma formatação além de cada elemento que pode ser:
-            - [ ] Recuo
-            - [ ] Alinhento
-            - [ ] Tamanho de papel (A4, Carta, etc)
-            - [ ] Recuo de primeira linha do paragrafo (Opcional)
-            - [ ] Citações com mais de 3 linhas (Opcional)
-- [ ] Título do artigo
 - [ ] Lombada
 - [ ] Sumário
 - [ ] Resumo
