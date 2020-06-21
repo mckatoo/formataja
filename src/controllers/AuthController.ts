@@ -3,15 +3,14 @@ import bcrypt from 'bcryptjs'
 import { Request, Response } from 'express'
 import TokenService from '../services/TokenService'
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 const { users } = prisma
 const { generateToken } = new TokenService()
 
-export default {
-
-  async login(req: Request, res: Response) {
+export class AuthController {
+  async login (req: Request, res: Response) {
     try {
-      const { email, password } = req.body.user;
+      const { email, password } = req.body.user
       const user = await users.findOne({
         where: {
           email
@@ -22,7 +21,7 @@ export default {
         return res.status(401).json({ error: 'User not found!' })
       }
 
-      if (!await bcrypt.compare(password, user.password)) {
+      if (!(await bcrypt.compare(password, user.password))) {
         return res.status(401).json({ error: 'Password incorrect!' })
       }
 
@@ -35,7 +34,5 @@ export default {
     } finally {
       await prisma.disconnect()
     }
-  },
-
+  }
 }
-

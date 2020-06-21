@@ -1,13 +1,14 @@
 import { Router } from 'express'
-import FormatsController from '../../controllers/FormatsController'
+import { FormatsController } from '@controllers/FormatsController'
 
+const controller = new FormatsController()
 const routes = Router()
 
-routes.get('/', FormatsController.list)
-routes.get('/id/:id_format', FormatsController.listById)
-routes.get('/name/:name', FormatsController.listByName)
-routes.post('/', FormatsController.store)
-routes.patch('/', FormatsController.update)
-routes.delete('/', FormatsController.delete)
+routes.get('/', controller.list)
+routes.get('/id/:id_format', controller.listById)
+routes.get('/name/:name', controller.listByName)
+routes.post('/', controller.store)
+routes.patch('/', controller.update)
+routes.delete('/', controller.delete)
 
 export default routes

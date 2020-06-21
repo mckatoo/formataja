@@ -6,8 +6,7 @@ const prisma = new PrismaClient()
 const { fonts } = prisma
 const { generateToken } = new TokenService()
 
-export default {
-
+export class FontController {
   async store (req: Request, res: Response) {
     try {
       const font = await fonts.create({
@@ -27,14 +26,14 @@ export default {
     } finally {
       await prisma.disconnect()
     }
-  },
+  }
 
-  async list(_req: Request, res: Response) {
+  async list (_req: Request, res: Response) {
     try {
       const fonts_list = await fonts.findMany({
         select: {
           id_font: true,
-          name: true,
+          name: true
         }
       })
       return res.status(200).json({ fonts_list })
@@ -43,7 +42,7 @@ export default {
     } finally {
       await prisma.disconnect()
     }
-  },
+  }
 
   async delete (req: Request, res: Response) {
     try {
@@ -61,7 +60,7 @@ export default {
     } finally {
       await prisma.disconnect()
     }
-  },
+  }
 
   async update (req: Request, res: Response) {
     try {
@@ -71,7 +70,7 @@ export default {
         data: { name },
         select: {
           id_font: true,
-          name: true,
+          name: true
         }
       })
       return res.status(202).json({
@@ -83,16 +82,16 @@ export default {
     } finally {
       await prisma.disconnect()
     }
-  },
+  }
 
   async listById (req: Request, res: Response) {
     try {
       const id_font = parseInt(req.params.id_font)
       const font = await fonts.findOne({
-        where: { id_font  },
+        where: { id_font },
         select: {
           id_font: true,
-          name: true,
+          name: true
         }
       })
       return res.status(200).json({ font })
@@ -101,7 +100,7 @@ export default {
     } finally {
       await prisma.disconnect()
     }
-  },
+  }
 
   async listByName (req: Request, res: Response) {
     try {
@@ -110,7 +109,7 @@ export default {
         where: { name },
         select: {
           id_font: true,
-          name: true,
+          name: true
         }
       })
       return res.status(200).json({ fonts_list })
@@ -119,7 +118,5 @@ export default {
     } finally {
       await prisma.disconnect()
     }
-
   }
 }
-

@@ -1,74 +1,74 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
-const { formats } = prisma;
-import { Request, Response } from 'express';
-import TokenService from '../services/TokenService';
-const { generateToken } = new TokenService();
+import { PrismaClient } from '@prisma/client'
+import { Request, Response } from 'express'
+import TokenService from '../services/TokenService'
+const prisma = new PrismaClient()
+const { formats } = prisma
+const { generateToken } = new TokenService()
 
-export default {
-  async store(req: Request, res: Response) {
+export class FormatsController {
+  async store (req: Request, res: Response) {
     try {
       const format = await formats.create({
         data: {
           ...req.body,
           fonts: {
-            connect: { id_font: req.body.fonts.id_font },
-          },
+            connect: { id_font: req.body.fonts.id_font }
+          }
         },
         select: {
           id_format: true,
           name: true,
-          fonts: true,
-        },
-      });
+          fonts: true
+        }
+      })
       return res.status(201).json({
-        format,
-      });
+        format
+      })
     } catch (errors) {
-      return res.status(400).json(errors);
+      return res.status(400).json(errors)
     } finally {
-      await prisma.disconnect();
+      await prisma.disconnect()
     }
-  },
+  }
 
-  async list(_req: Request, res: Response) {
+  async list (_req: Request, res: Response) {
     try {
       const formats_list = await formats.findMany({
         select: {
           id_format: true,
-          name: true,
-        },
-      });
-      return res.status(200).json({ formats: formats_list });
+          name: true
+        }
+      })
+      return res.status(200).json({ formats: formats_list })
     } catch (error) {
-      return res.status(400).json({ error });
+      return res.status(400).json({ error })
     } finally {
-      await prisma.disconnect();
+      await prisma.disconnect()
     }
-  },
+  }
 
-  async delete(req: Request, res: Response) {
+  async delete (req: Request, res: Response) {
     try {
-      const { id_format } = req.body;
+      const { id_format } = req.body
       await formats.delete({
         where: { id_format },
         select: {
           id_format: true,
           name: true,
-          fonts: true,
-        },
-      });
-      return res.status(204).send();
+          fonts: true
+        }
+      })
+      return res.status(204).send()
     } catch (errors) {
-      return res.status(404).json(errors);
+      return res.status(404).json(errors)
     } finally {
-      await prisma.disconnect();
+      await prisma.disconnect()
     }
-  },
+  }
 
-  async update(req: Request, res: Response) {
+  async update (req: Request, res: Response) {
     try {
-      const { id_format } = req.body;
+      const { id_format } = req.body
       const format = await formats.update({
         where: { id_format },
         data: {
@@ -82,55 +82,55 @@ export default {
         select: {
           id_format: true,
           name: true,
-          fonts: true,
-        },
-      });
+          fonts: true
+        }
+      })
       return res.status(202).json({
         format,
-        token: generateToken({ id: format.id_format }),
-      });
+        token: generateToken({ id: format.id_format })
+      })
     } catch (errors) {
-      return res.status(400).json(errors);
+      return res.status(400).json(errors)
     } finally {
-      await prisma.disconnect();
+      await prisma.disconnect()
     }
-  },
+  }
 
-  async listById(req: Request, res: Response) {
+  async listById (req: Request, res: Response) {
     try {
-      const id_format = parseInt(req.params.id_format);
+      const id_format = parseInt(req.params.id_format)
       const format = await formats.findOne({
         where: { id_format },
         select: {
           id_format: true,
           name: true,
-          fonts: true,
-        },
-      });
-      return res.status(200).json({ format });
+          fonts: true
+        }
+      })
+      return res.status(200).json({ format })
     } catch (error) {
-      return res.status(400).json({ error });
+      return res.status(400).json({ error })
     } finally {
-      await prisma.disconnect();
+      await prisma.disconnect()
     }
-  },
+  }
 
-  async listByName(req: Request, res: Response) {
+  async listByName (req: Request, res: Response) {
     try {
-      const { name } = req.params;
+      const { name } = req.params
       const formats_list = await formats.findMany({
         where: { name },
         select: {
           id_format: true,
           name: true,
-          fonts: true,
-        },
-      });
-      return res.status(200).json({ formats: formats_list });
+          fonts: true
+        }
+      })
+      return res.status(200).json({ formats: formats_list })
     } catch (error) {
-      return res.status(400).json(error);
+      return res.status(400).json(error)
     } finally {
-      await prisma.disconnect();
+      await prisma.disconnect()
     }
-  },
-};
+  }
+}

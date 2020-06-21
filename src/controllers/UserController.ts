@@ -4,11 +4,10 @@ import bcrypt from 'bcryptjs'
 import TokenService from '../services/TokenService'
 
 const prisma = new PrismaClient()
-const { users }= prisma
+const { users } = prisma
 const { generateToken } = new TokenService()
 
-export default {
-
+export class UserController {
   async store (req: Request, res: Response) {
     try {
       const hash = await bcrypt.hash(req.body.password, 10)
@@ -30,9 +29,9 @@ export default {
     } finally {
       await prisma.disconnect()
     }
-  },
+  }
 
-  async list(_req: Request, res: Response) {
+  async list (_req: Request, res: Response) {
     try {
       const users_list = await users.findMany({
         select: {
@@ -47,7 +46,7 @@ export default {
     } finally {
       await prisma.disconnect()
     }
-  },
+  }
 
   async delete (req: Request, res: Response) {
     try {
@@ -66,7 +65,7 @@ export default {
     } finally {
       await prisma.disconnect()
     }
-  },
+  }
 
   async update (req: Request, res: Response) {
     try {
@@ -90,13 +89,13 @@ export default {
     } finally {
       await prisma.disconnect()
     }
-  },
+  }
 
   async listById (req: Request, res: Response) {
     try {
       const id_user = parseInt(req.params.id_user)
       const user = await users.findOne({
-        where: { id_user  },
+        where: { id_user },
         select: {
           id_user: true,
           name: true,
@@ -109,7 +108,7 @@ export default {
     } finally {
       await prisma.disconnect()
     }
-  },
+  }
 
   async listByName (req: Request, res: Response) {
     try {
@@ -128,7 +127,7 @@ export default {
     } finally {
       await prisma.disconnect()
     }
-  },
+  }
 
   async listByEmail (req: Request, res: Response) {
     try {
@@ -144,6 +143,4 @@ export default {
       await prisma.disconnect()
     }
   }
-
 }
-

@@ -15,6 +15,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/mckatoo/formataja)
 ![GitHub top language](https://img.shields.io/github/languages/top/mckatoo/formataja)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/mckatoo/formataja)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 ## Feito
 
