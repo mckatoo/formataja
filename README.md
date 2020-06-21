@@ -34,12 +34,6 @@
 ### Cadastro de usuários
 - [x] Autenticação
 - [x] Um usuário poder ter vários artigos
-
-### Cadastro de artigos
-- [x] Um artigo tem somente um(a):
-
-## A fazer
-
 ### Cadastro de usuários
 - [x] Autorização
     - [x] Formatação:
@@ -50,9 +44,13 @@
             - [x] Tamanho de papel (A4, Carta, etc)
             - [x] Recuo de primeira linha do paragrafo (Opcional)
             - [x] Citações com mais de 3 linhas (Opcional)
-- [x] Título do artigo
+
+
+## A fazer
 
 ### Cadastro de artigos
+- [ ] Título do artigo
+- [ ] Um artigo tem somente um(a):
 - [ ] Lombada
 - [ ] Sumário
 - [ ] Resumo
