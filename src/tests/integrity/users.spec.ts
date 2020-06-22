@@ -1,6 +1,14 @@
+/**
+ * @file             : users.spec.ts
+ * @author           : Milton Carlos Katoo <mckatoo@gmail.com>
+ * Date              : 22.06.2020
+ * Last Modified Date: 22.06.2020
+ * Last Modified By  : Milton Carlos Katoo <mckatoo@gmail.com>
+ */
+import { PrismaClient } from '@prisma/client'
 import faker from 'faker'
 import request from 'supertest'
-import { PrismaClient } from '@prisma/client'
+
 import app from '../../app'
 import TokenService from '../../services/TokenService'
 
@@ -13,13 +21,13 @@ describe('Users', function () {
   })
 
   afterAll(async () => {
-    await users.deleteMany({
-      where: {
-        id_user: {
-          gt: 0
-        }
-      }
-    })
+    // await users.deleteMany({
+    //   where: {
+    //     id_user: {
+    //       gt: 0
+    //     }
+    //   }
+    // })
     await prisma.disconnect()
   })
 
