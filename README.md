@@ -1,8 +1,3 @@
- File              : README.md
- Author            : Milton Carlos Katoo <mckatoo@gmail.com>
- Date              : 21.06.2020
- Last Modified Date: 21.06.2020
- Last Modified By  : Milton Carlos Katoo <mckatoo@gmail.com>
 # Formataja
 ## App para formatar documentos
 
