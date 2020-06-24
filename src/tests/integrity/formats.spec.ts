@@ -2,7 +2,7 @@
  * @file             : formats.spec.ts
  * @author           : Milton Carlos Katoo <mckatoo@gmail.com>
  * Date              : 22.06.2020
- * Last Modified Date: 22.06.2020
+ * Last Modified Date: 24.06.2020
  * Last Modified By  : Milton Carlos Katoo <mckatoo@gmail.com>
  */
 import { PrismaClient } from '@prisma/client'
@@ -35,13 +35,6 @@ describe('Formats', function () {
   })
 
   afterAll(async () => {
-    // await formats.deleteMany({
-    //   where: {
-    //     id_format: {
-    //       gt: 0
-    //     }
-    //   }
-    // })
     await prisma.disconnect()
   })
 

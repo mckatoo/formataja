@@ -2,7 +2,7 @@
  * @file             : articles.spec.ts
  * @author           : Milton Carlos Katoo <mckatoo@gmail.com>
  * Date              : 22.06.2020
- * Last Modified Date: 22.06.2020
+ * Last Modified Date: 24.06.2020
  * Last Modified By  : Milton Carlos Katoo <mckatoo@gmail.com>
  */
 import { PrismaClient } from '@prisma/client'
@@ -79,13 +79,6 @@ describe('Articles', function () {
   })
 
   afterAll(async () => {
-    // await articles.deleteMany({
-    //   where: {
-    //     id_article: {
-    //       gt: 0
-    //     }
-    //   }
-    // })
     await prisma.disconnect()
   })
 
@@ -98,7 +91,7 @@ describe('Articles', function () {
 
   it('Should return articles filtered by title', async () => {
     const response = await request(app)
-      .get(`/articles/${articles_list[1].title.substring(4, 16)}`)
+      .get(`/articles/${articles_list[1].title}`)
       .set('authorization', `Bearer ${generateToken({ id: user.id_user })}`)
     expect(response.status).toBe(200)
     expect(response.body.articles.length).toBe(1)
@@ -107,18 +100,18 @@ describe('Articles', function () {
 
   it('Should return articles filtered by title of topics', async () => {
     const response = await request(app)
-      .get(`/articles/${articles_list[1].topics[0].title.substring(4, 16)}`)
+      .get(`/articles/${articles_list[1].topics[0].title}`)
       .set('authorization', `Bearer ${generateToken({ id: user.id_user })}`)
     expect(response.status).toBe(200)
-    expect(response.body.articles.length).toBeGreaterThanOrEqual(1)
+    expect(response.body.articles.length).toBe(1)
   })
 
   it('Should return articles filtered by text of topics', async () => {
     const response = await request(app)
-      .get(`/articles/${articles_list[1].topics[0].text.substring(20, 56)}`)
+      .get(`/articles/${articles_list[1].topics[0].text}`)
       .set('authorization', `Bearer ${generateToken({ id: user.id_user })}`)
     expect(response.status).toBe(200)
-    expect(response.body.articles.length).toBeGreaterThanOrEqual(1)
+    expect(response.body.articles.length).toBe(1)
   })
 
   it('Should list articles by id', async () => {

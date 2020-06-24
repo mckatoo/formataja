@@ -2,7 +2,7 @@
  * @file             : index.ts
  * @author           : Milton Carlos Katoo <mckatoo@gmail.com>
  * Date              : 21.06.2020
- * Last Modified Date: 22.06.2020
+ * Last Modified Date: 24.06.2020
  * Last Modified By  : Milton Carlos Katoo <mckatoo@gmail.com>
  */
 import { Router } from 'express'

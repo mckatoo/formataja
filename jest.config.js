@@ -2,7 +2,7 @@
  * @file             : jest.config.js
  * @author           : Milton Carlos Katoo <mckatoo@gmail.com>
  * Date              : 21.06.2020
- * Last Modified Date: 21.06.2020
+ * Last Modified Date: 24.06.2020
  * Last Modified By  : Milton Carlos Katoo <mckatoo@gmail.com>
  */
 const { pathsToModuleNameMapper } = require('ts-jest/utils');
@@ -17,7 +17,7 @@ module.exports = {
   // automock: false,
 
   // Stop running tests after `n` failures
-  // bail: 0,
+  bail: 1,
 
   // The directory where Jest should store its cached dependency information
   // cacheDirectory: "/tmp/jest_rs",

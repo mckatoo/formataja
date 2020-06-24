@@ -12,6 +12,7 @@
   },
   "plugins": ["@typescript-eslint", "import-helpers", "eslint-plugin-import-helpers"],
   "rules": {
+    "space-before-function-paren": "off",
     "no-undef": "off",
     "comma-dangle": "off",
     "camelcase": "off",

@@ -1,6 +1,14 @@
+/**
+ * @file             : AuthController.ts
+ * @author           : Milton Carlos Katoo <mckatoo@gmail.com>
+ * Date              : 24.06.2020
+ * Last Modified Date: 24.06.2020
+ * Last Modified By  : Milton Carlos Katoo <mckatoo@gmail.com>
+ */
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
 import { Request, Response } from 'express'
+
 import TokenService from '../services/TokenService'
 
 const prisma = new PrismaClient()
@@ -8,13 +16,13 @@ const { users } = prisma
 const { generateToken } = new TokenService()
 
 export class AuthController {
-  async login (req: Request, res: Response) {
+  async login(req: Request, res: Response) {
     try {
-      const { email, password } = req.body.user
+      const { email, password } = req.body
       const user = await users.findOne({
         where: {
-          email
-        }
+          email,
+        },
       })
 
       if (!user) {
@@ -27,7 +35,7 @@ export class AuthController {
 
       return res.status(202).json({
         user,
-        token: generateToken({ id: user.id_user })
+        token: generateToken({ id: user.id_user }),
       })
     } catch (errors) {
       return res.status(400).json(errors)

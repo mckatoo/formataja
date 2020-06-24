@@ -2,7 +2,7 @@
  * @file             : fonts.spec.ts
  * @author           : Milton Carlos Katoo <mckatoo@gmail.com>
  * Date              : 22.06.2020
- * Last Modified Date: 22.06.2020
+ * Last Modified Date: 24.06.2020
  * Last Modified By  : Milton Carlos Katoo <mckatoo@gmail.com>
  */
 import { PrismaClient } from '@prisma/client'
@@ -41,13 +41,6 @@ describe('Fonts', function () {
   })
 
   afterAll(async () => {
-    // await fonts.deleteMany({
-    //   where: {
-    //     id_font: {
-    //       gt: 0
-    //     }
-    //   }
-    // })
     await prisma.disconnect()
   })
 

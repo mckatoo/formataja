@@ -2,7 +2,7 @@
  * @file             : auth.spec.ts
  * @author           : Milton Carlos Katoo <mckatoo@gmail.com>
  * Date              : 21.06.2020
- * Last Modified Date: 22.06.2020
+ * Last Modified Date: 24.06.2020
  * Last Modified By  : Milton Carlos Katoo <mckatoo@gmail.com>
  */
 import { PrismaClient } from '@prisma/client'
@@ -21,13 +21,6 @@ describe('Authentication', function () {
   beforeAll(async () => {})
 
   afterAll(async () => {
-    // await users.deleteMany({
-    //   where: {
-    //     id_user: {
-    //       gt: 0
-    //     }
-    //   }
-    // })
     await prisma.disconnect()
   })
 
@@ -42,7 +35,7 @@ describe('Authentication', function () {
       }
     })
     user.password = password
-    const response = await request(app).post('/login').send({ user })
+    const response = await request(app).post('/login').send(user)
     expect(response.status).toBe(202)
     expect(response.body).toHaveProperty('token')
   })
@@ -57,7 +50,7 @@ describe('Authentication', function () {
       }
     })
     user.email = 'aaaaaaa@ssssss.com'
-    const response = await request(app).post('/login').send({ user })
+    const response = await request(app).post('/login').send(user)
     expect(response.status).toBe(401)
     expect(response.body.error).toBe('User not found!')
   })
@@ -72,7 +65,7 @@ describe('Authentication', function () {
       }
     })
     user.password = 'afsdfjsd'
-    const response = await request(app).post('/login').send({ user })
+    const response = await request(app).post('/login').send(user)
     expect(response.status).toBe(401)
     expect(response.body.error).toBe('Password incorrect!')
   })
