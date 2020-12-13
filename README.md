@@ -1,4 +1,5 @@
 # Formataja
+
 ## App para formatar documentos
 
 ![GitHub Workflow Status (branch)](https://cloud.drone.io/api/badges/mckatoo/formataja/status.svg)
@@ -23,36 +24,35 @@
 ## Feito
 
 ### Cadastro de usuários
+
 - [x] Testes
 - [x] Rotas
 - [x] Controller
-### Cadastro de usuários
 - [x] Autenticação
 - [x] Um usuário poder ter vários artigos
-### Cadastro de usuários
 - [x] Autorização
-    - [x] Formatação:
-        - [x] Configuração de margens:
-        - [x] O texto todo tem uma formatação além de cada elemento que pode ser:
-            - [x] Recuo
-            - [x] Alinhento
-            - [x] Tamanho de papel (A4, Carta, etc)
-            - [x] Recuo de primeira linha do paragrafo (Opcional)
-            - [x] Citações com mais de 3 linhas (Opcional)
-
+  - [x] Formatação:
+    - [x] Configuração de margens:
+    - [x] O texto todo tem uma formatação além de cada elemento que pode ser:
+      - [x] Recuo
+      - [x] Alinhento
+      - [x] Tamanho de papel (A4, Carta, etc)
+      - [x] Recuo de primeira linha do paragrafo (Opcional)
+      - [x] Citações com mais de 3 linhas (Opcional)
 
 ## A fazer
 
 ### Cadastro de artigos
+
 - [ ] Título do artigo
 - [ ] Um artigo tem somente um(a):
-- [ ] Lombada
-- [ ] Sumário
-- [ ] Resumo
-- [ ] Abstract
-- [ ] Epígrafe (Opcional)
-- [ ] Agradecimentos (Opcional)
-- [ ] Paginação:
+  - [ ] Lombada
+  - [ ] Sumário
+  - [ ] Resumo
+  - [ ] Abstract
+  - [ ] Epígrafe (Opcional)
+  - [ ] Agradecimentos (Opcional)
+  - [ ] Paginação:
     - [ ] Conta a partir de
     - [ ] Mostra a partir de
     - [ ] Formatação
